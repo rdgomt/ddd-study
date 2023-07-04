@@ -1,0 +1,17 @@
+{
+  "name": "ddd-study",
+  "description": "A forum app made for practicing Domain-driven Design (DDD) concepts.",
+  "main": "src/index.ts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "vitest run",
+    "test:cov": "yarn test --coverage",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.3",
+    "typescript": "^5.1.6",
+    "vitest": "^0.32.4"
+  }
+}
