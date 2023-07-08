@@ -4,14 +4,28 @@
   "main": "src/index.ts",
   "version": "1.0.0",
   "scripts": {
+    "check-spell": "cspell \"src/**/*.{ts,tsx}\" --no-must-find-files --gitignore --unique --no-progress",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "eslint --fix",
+    "prettify": "prettier --write --ignore-unknown",
     "test": "vitest run",
     "test:cov": "yarn test --coverage",
     "test:ui": "vitest --ui",
     "test:watch": "vitest"
   },
   "devDependencies": {
+    "@cspell/dict-pt-br": "^2.1.4",
+    "@rdgomt/eslint-config": "latest",
     "@types/node": "^20.3.3",
+    "cspell": "^6.31.1",
+    "eslint": "^8.44.0",
+    "prettier": "^2.8.8",
     "typescript": "^5.1.6",
+    "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.32.4"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.9"
   }
 }
