@@ -1,6 +1,8 @@
 {
   "extends": "@rdgomt/eslint-config",
   "rules": {
+    "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
+    "typescript-sort-keys/interface": "warn",
     "padding-line-between-statements": [
       "warn",
       {

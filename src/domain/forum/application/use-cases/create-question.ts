@@ -4,8 +4,8 @@ import { QuestionsRepository } from '../repositories/questions-repository'
 
 interface CreateQuestionUseCaseInput {
   authorId: string
-  title: string
   content: string
+  title: string
 }
 
 interface CreateQuestionUseCaseOutput {
