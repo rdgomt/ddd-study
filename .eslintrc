@@ -1,3 +1,18 @@
 {
-  "extends": "@rdgomt/eslint-config"
+  "extends": "@rdgomt/eslint-config",
+  "rules": {
+    "padding-line-between-statements": [
+      "warn",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["block", "block-like", "multiline-const", "multiline-let", "multiline-var", "return", "throw"]
+      },
+      {
+        "blankLine": "never",
+        "prev": ["singleline-const", "singleline-let", "singleline-var"],
+        "next": ["singleline-const", "singleline-let", "singleline-var"]
+      }
+    ]
+  }
 }

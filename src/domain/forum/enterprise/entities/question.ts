@@ -6,7 +6,7 @@ import { Slug } from './value-objects/slug'
 
 const MAX_CONTENT_LENGTH = 120 // TODO: create VO for content
 
-interface QuestionProps {
+export interface QuestionProps {
   authorId: UniqueEntityID
   bestAnswerId?: UniqueEntityID
   title: string

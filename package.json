@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@cspell/dict-pt-br": "^2.1.4",
+    "@faker-js/faker": "^8.0.2",
     "@rdgomt/eslint-config": "latest",
     "@types/node": "^20.3.3",
     "cspell": "^6.31.1",
