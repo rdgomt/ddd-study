@@ -6,4 +6,5 @@ export interface QuestionsRepository {
   delete: (question: Question) => Promise<void>
   findById: (questionId: string) => Promise<Nullable<Question>>
   findBySlug: (slug: string) => Promise<Nullable<Question>>
+  save: (question: Question) => Promise<void>
 }
