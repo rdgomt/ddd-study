@@ -4,11 +4,11 @@ import { now } from '@/utils/date.utils'
 
 const MAX_CONTENT_LENGTH = 120
 
-type AnswerProps = {
+export interface AnswerProps {
   authorId: UniqueEntityID
-  questionId: UniqueEntityID
   content: string
   createdAt: Date
+  questionId: UniqueEntityID
   updatedAt?: Date
 }
 

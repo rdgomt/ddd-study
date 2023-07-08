@@ -9,10 +9,10 @@ const MAX_CONTENT_LENGTH = 120 // TODO: create VO for content
 export interface QuestionProps {
   authorId: UniqueEntityID
   bestAnswerId?: UniqueEntityID
-  title: string
   content: string
-  slug: Slug
   createdAt: Date
+  slug: Slug
+  title: string
   updatedAt?: Date
 }
 

@@ -3,9 +3,9 @@ import { Answer } from '../../enterprise/entities/answer'
 import { AnswersRepository } from '../repositories/answers-repository'
 
 interface AnswerQuestionUseCaseInput {
+  content: string
   instructorId: string
   questionId: string
-  content: string
 }
 
 interface AnswerQuestionUseCaseOutput {
