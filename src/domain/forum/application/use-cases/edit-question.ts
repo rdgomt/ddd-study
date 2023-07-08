@@ -1,3 +1,4 @@
+import { Question } from '../../enterprise/entities/question'
 import { QuestionsRepository } from '../repositories/questions-repository'
 
 interface EditQuestionUseCaseInput {
@@ -7,20 +8,24 @@ interface EditQuestionUseCaseInput {
   title: string
 }
 
+interface EditQuestionUseCaseOutput {
+  question: Question
+}
+
 export class EditQuestionUseCase {
   constructor(private questionsRepository: QuestionsRepository) {}
 
-  async execute({ authorId, questionId, title, content }: EditQuestionUseCaseInput): Promise<void> {
+  async execute({
+    authorId,
+    questionId,
+    title,
+    content,
+  }: EditQuestionUseCaseInput): Promise<EditQuestionUseCaseOutput> {
     const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
       throw new Error('Question not found.')
     }
-
-    // console.log('question', question)
-    // console.log('authorId', authorId)
-    // console.log('question.authorId.value', question.authorId.value)
-    // console.log('authorId', authorId === question.authorId.value)
 
     if (authorId !== question.authorId.value) {
       throw new Error('Unauthorized')
@@ -30,5 +35,9 @@ export class EditQuestionUseCase {
     question.content = content
 
     await this.questionsRepository.save(question)
+
+    return {
+      question,
+    }
   }
 }

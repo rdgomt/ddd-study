@@ -5,4 +5,5 @@ export interface AnswersRepository {
   create: (answer: Answer) => Promise<void>
   delete: (answer: Answer) => Promise<void>
   findById: (answerId: string) => Promise<Nullable<Answer>>
+  save: (answer: Answer) => Promise<void>
 }
