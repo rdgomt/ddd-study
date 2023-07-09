@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { now } from '@/utils/date.utils'
+import { Optional } from '@/utils/typescript.utils'
 import { Slug } from './value-objects/slug'
 
 const MAX_CONTENT_LENGTH = 120 // TODO: create VO for content
@@ -16,13 +17,15 @@ export interface QuestionProps {
   updatedAt?: Date
 }
 
+export type CreateQuestionProps = Optional<Omit<QuestionProps, 'slug' | 'updatedAt'>, 'createdAt'>
+
 export class Question extends Entity<QuestionProps> {
-  static create(props: Omit<QuestionProps, 'createdAt' | 'slug'>, id?: UniqueEntityID) {
+  static create(props: CreateQuestionProps, id?: UniqueEntityID) {
     return new Question(
       {
         ...props,
         slug: Slug.createFromText(props.title),
-        createdAt: now(),
+        createdAt: props.createdAt ?? now(),
       },
       id,
     )

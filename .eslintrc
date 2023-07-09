@@ -2,6 +2,13 @@
   "extends": "@rdgomt/eslint-config",
   "rules": {
     "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
+    "id-length": [
+      "warn",
+      {
+        "min": 2,
+        "exceptions": ["a", "b", "x", "y"]
+      }
+    ],
     "padding-line-between-statements": [
       "warn",
       {
