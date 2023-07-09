@@ -1,5 +1,14 @@
 {
   "extends": "@rdgomt/eslint-config",
+  "overrides": [
+    {
+      "files": ["*.spec.ts", "*.test.ts"],
+      "rules": {
+        "max-lines-per-function": "off",
+        "no-magic-numbers": "off"
+      }
+    }
+  ],
   "rules": {
     "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
     "id-length": [
