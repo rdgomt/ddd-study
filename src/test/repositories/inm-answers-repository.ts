@@ -2,27 +2,27 @@ import { AnswersRepository } from '@/domain/forum/application/repositories/answe
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 
 export class InMemoryAnswersRepository implements AnswersRepository {
-  public answers: Answer[] = []
+  public items: Answer[] = []
 
   private findIndexById(id: string) {
-    return this.answers.findIndex((item) => item.id.value === id)
+    return this.items.findIndex((item) => item.id.value === id)
   }
 
   async create(answer: Answer) {
-    this.answers.push(answer)
+    this.items.push(answer)
   }
 
   async delete(answer: Answer) {
-    const index = this.answers.findIndex((item) => item.id === answer.id)
-    this.answers.splice(index, 1)
+    const index = this.items.findIndex((item) => item.id === answer.id)
+    this.items.splice(index, 1)
   }
 
   async findById(answerId: string) {
-    return this.answers.find((item) => item.id.value === answerId) || null
+    return this.items.find((item) => item.id.value === answerId) || null
   }
 
   async save(answer: Answer) {
     const index = this.findIndexById(answer.id.value)
-    this.answers[index] = answer
+    this.items[index] = answer
   }
 }

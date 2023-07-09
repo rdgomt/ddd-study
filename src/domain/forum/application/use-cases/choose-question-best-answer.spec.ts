@@ -28,7 +28,7 @@ describe('ChooseQuestionBestAnswerUseCase', () => {
       answerId: answer.id.value,
     })
 
-    expect(questionsRepository.questions[0].bestAnswerId).toEqual(answer.id)
+    expect(questionsRepository.items[0].bestAnswerId).toEqual(answer.id)
   })
 
   it('should not be able to choose another user question best answer', async () => {

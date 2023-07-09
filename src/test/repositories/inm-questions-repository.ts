@@ -2,31 +2,31 @@ import { QuestionsRepository } from '@/domain/forum/application/repositories/que
 import { Question } from '@/domain/forum/enterprise/entities/question'
 
 export class InMemoryQuestionsRepository implements QuestionsRepository {
-  public questions: Question[] = []
+  public items: Question[] = []
 
   private findIndexById(id: string) {
-    return this.questions.findIndex((item) => item.id.value === id)
+    return this.items.findIndex((item) => item.id.value === id)
   }
 
   async create(question: Question) {
-    this.questions.push(question)
+    this.items.push(question)
   }
 
   async delete(question: Question) {
     const index = this.findIndexById(question.id.value)
-    this.questions.splice(index, 1)
+    this.items.splice(index, 1)
   }
 
   async findById(questionId: string) {
-    return this.questions.find((item) => item.id.value === questionId) || null
+    return this.items.find((item) => item.id.value === questionId) || null
   }
 
   async findBySlug(slug: string) {
-    return this.questions.find((item) => item.slug.value === slug) || null
+    return this.items.find((item) => item.slug.value === slug) || null
   }
 
   async save(question: Question) {
     const index = this.findIndexById(question.id.value)
-    this.questions[index] = question
+    this.items[index] = question
   }
 }

@@ -26,7 +26,7 @@ describe('EditQuestionUseCase', () => {
       content: newContent,
     })
 
-    expect(questionsRepository.questions[0]).toMatchObject({
+    expect(questionsRepository.items[0]).toMatchObject({
       title: newTitle,
       content: newContent,
     })

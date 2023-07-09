@@ -24,7 +24,7 @@ describe('EditAnswerUseCase', () => {
       content: newContent,
     })
 
-    expect(answersRepository.answers[0]).toMatchObject({
+    expect(answersRepository.items[0]).toMatchObject({
       content: newContent,
     })
   })
