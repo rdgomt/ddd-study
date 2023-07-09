@@ -2,19 +2,19 @@ import { makeAnswer } from '@/test/factories/make-answer'
 import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
 import { EditAnswerUseCase } from './edit-answer'
 
-let inMemoryAnswersRepository: InMemoryAnswersRepository
+let answersRepository: InMemoryAnswersRepository
 let editAnswerUseCase: EditAnswerUseCase
 
 describe('EditAnswerUseCase', () => {
   beforeEach(() => {
-    inMemoryAnswersRepository = new InMemoryAnswersRepository()
-    editAnswerUseCase = new EditAnswerUseCase(inMemoryAnswersRepository)
+    answersRepository = new InMemoryAnswersRepository()
+    editAnswerUseCase = new EditAnswerUseCase(answersRepository)
   })
 
   it('should be able to edit a answer', async () => {
     const newAnswer = makeAnswer()
 
-    await inMemoryAnswersRepository.create(newAnswer)
+    await answersRepository.create(newAnswer)
 
     const newContent = 'new-content'
 
@@ -24,7 +24,7 @@ describe('EditAnswerUseCase', () => {
       content: newContent,
     })
 
-    expect(inMemoryAnswersRepository.answers[0]).toMatchObject({
+    expect(answersRepository.answers[0]).toMatchObject({
       content: newContent,
     })
   })
@@ -32,7 +32,7 @@ describe('EditAnswerUseCase', () => {
   it('should not be able to edit a answer from another author', async () => {
     const newAnswer = makeAnswer()
 
-    await inMemoryAnswersRepository.create(newAnswer)
+    await answersRepository.create(newAnswer)
 
     await expect(() => {
       return editAnswerUseCase.execute({

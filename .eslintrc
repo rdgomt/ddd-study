@@ -2,7 +2,6 @@
   "extends": "@rdgomt/eslint-config",
   "rules": {
     "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
-    "typescript-sort-keys/interface": "warn",
     "padding-line-between-statements": [
       "warn",
       {
@@ -15,6 +14,8 @@
         "prev": ["singleline-const", "singleline-let", "singleline-var"],
         "next": ["singleline-const", "singleline-let", "singleline-var"]
       }
-    ]
+    ],
+    "max-statements": "off",
+    "typescript-sort-keys/interface": "warn"
   }
 }
