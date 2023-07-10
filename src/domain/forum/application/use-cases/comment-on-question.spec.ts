@@ -2,7 +2,7 @@ import { makeQuestion } from '@/test/factories/make-question'
 import { InMemoryQuestionCommentsRepository } from '@/test/repositories/inm-question-comments-repository'
 import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
 import { faker } from '@faker-js/faker'
-import { CommentOnQuestionUseCase } from './comment-on-question-use-case'
+import { CommentOnQuestionUseCase } from './comment-on-question'
 
 const COMMENT_CONTENT = faker.lorem.text()
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
