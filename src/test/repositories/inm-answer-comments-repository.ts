@@ -7,4 +7,20 @@ export class InMemoryAnswerCommentsRepository implements AnswerCommentsRepositor
   async create(answerComment: AnswerComment) {
     this.items.push(answerComment)
   }
+
+  async delete(answerComment: AnswerComment) {
+    const itemIndex = this.items.findIndex((item) => item.id === answerComment.id)
+
+    this.items.splice(itemIndex, 1)
+  }
+
+  async findById(id: string) {
+    const answerComment = this.items.find((item) => item.id.value === id)
+
+    if (!answerComment) {
+      return null
+    }
+
+    return answerComment
+  }
 }
