@@ -23,7 +23,31 @@
       {
         "blankLine": "always",
         "prev": "*",
-        "next": ["block", "block-like", "multiline-const", "multiline-let", "multiline-var", "return", "throw"]
+        "next": [
+          "block",
+          "break",
+          "case",
+          "cjs-export",
+          "continue",
+          "default",
+          "do",
+          "export",
+          "for",
+          "function",
+          "if",
+          "iife",
+          "multiline-block-like",
+          "multiline-const",
+          "multiline-expression",
+          "multiline-let",
+          "multiline-var",
+          "return",
+          "switch",
+          "throw",
+          "try",
+          "while",
+          "with"
+        ]
       },
       {
         "blankLine": "never",
