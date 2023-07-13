@@ -1,5 +1,11 @@
 export type Nullable<T> = T | null
 
+export type AsyncNullable<T> = Promise<Nullable<T>>
+
+export type Maybe<T> = T | null | undefined
+
+export type AsyncMaybe<T> = Promise<Maybe<T>>
+
 /**
  * Make some property optional on type
  *
