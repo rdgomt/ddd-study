@@ -1,3 +1,4 @@
+import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { makeAnswer } from '@/test/factories/make-answer'
 import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
 import { EditAnswerUseCase } from './edit-answer'
@@ -18,13 +19,19 @@ describe('EditAnswerUseCase', () => {
 
     const newContent = 'new-content'
 
-    await editAnswerUseCase.execute({
+    const result = await editAnswerUseCase.execute({
       answerId: newAnswer.id.value,
       authorId: newAnswer.authorId.value,
       content: newContent,
     })
 
-    expect(answersRepository.items[0]).toMatchObject({
+    expect(result.isRight()).toBe(true)
+
+    if (!result.isRight()) {
+      return
+    }
+
+    expect(result.value.answer).toMatchObject({
       content: newContent,
     })
   })
@@ -34,12 +41,13 @@ describe('EditAnswerUseCase', () => {
 
     await answersRepository.create(newAnswer)
 
-    await expect(() => {
-      return editAnswerUseCase.execute({
-        answerId: newAnswer.id.value,
-        authorId: 'another-author',
-        content: 'new-content',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await editAnswerUseCase.execute({
+      answerId: newAnswer.id.value,
+      authorId: 'another-author',
+      content: 'new-content',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

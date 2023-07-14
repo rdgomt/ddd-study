@@ -1,8 +1,7 @@
 import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
-import { QuestionsRepository } from '../repositories/questions-repository'
 import { CreateQuestionUseCase } from './create-question'
 
-let questionsRepository: QuestionsRepository
+let questionsRepository: InMemoryQuestionsRepository
 let createQuestionUseCase: CreateQuestionUseCase
 
 describe('CreateQuestionUseCase', () => {
@@ -12,12 +11,13 @@ describe('CreateQuestionUseCase', () => {
   })
 
   it('should be able to create a question', async () => {
-    const { question } = await createQuestionUseCase.execute({
+    const result = await createQuestionUseCase.execute({
       authorId: 'authorId',
       title: 'title',
       content: 'content',
     })
 
-    expect(question.id).toBeTruthy()
+    expect(result.isRight()).toBe(true)
+    expect(questionsRepository.items[0]).toEqual(result.value?.question)
   })
 })

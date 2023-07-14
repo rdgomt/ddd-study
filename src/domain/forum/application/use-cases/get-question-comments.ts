@@ -1,3 +1,4 @@
+import { Either, right } from '@/core/either'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { QuestionComment } from '../../enterprise/entities/question-comment'
 import { QuestionCommentsRepository } from '../repositories/question-comments-repository'
@@ -7,23 +8,25 @@ interface GetQuestionCommentsUseCaseInput {
   questionId: string
 }
 
-interface GetQuestionCommentsUseCaseOutput {
-  questionComments: QuestionComment[]
-}
+type GetQuestionCommentsUseCaseOutput = Promise<
+  Either<
+    void,
+    {
+      questionComments: QuestionComment[]
+    }
+  >
+>
 
 export class GetQuestionCommentsUseCase {
   constructor(private questionCommentsRepository: QuestionCommentsRepository) {}
 
-  async execute({
-    questionId,
-    pagination,
-  }: GetQuestionCommentsUseCaseInput): Promise<GetQuestionCommentsUseCaseOutput> {
+  async execute({ questionId, pagination }: GetQuestionCommentsUseCaseInput): GetQuestionCommentsUseCaseOutput {
     const questionComments = await this.questionCommentsRepository.findManyByQuestionId(questionId, {
       page: pagination.page,
     })
 
-    return {
+    return right({
       questionComments,
-    }
+    })
   }
 }

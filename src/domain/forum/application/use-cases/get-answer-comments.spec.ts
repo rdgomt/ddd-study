@@ -1,11 +1,10 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { makeAnswerComment } from '@/test/factories/make-answer-comment'
 import { InMemoryAnswerCommentsRepository } from '@/test/repositories/inm-answer-comments-repository'
-import { AnswerCommentsRepository } from '../repositories/answer-comments-repository'
 import { GetAnswerCommentsUseCase } from './get-answer-comments'
 
 const answerId = 'answer-id'
-let answerCommentsRepository: AnswerCommentsRepository
+let answerCommentsRepository: InMemoryAnswerCommentsRepository
 let getAnswerCommentsUseCase: GetAnswerCommentsUseCase
 
 describe('GetAnswerCommentsUseCase', () => {
@@ -25,14 +24,15 @@ describe('GetAnswerCommentsUseCase', () => {
       }),
     )
 
-    const { answerComments } = await getAnswerCommentsUseCase.execute({
+    const result = await getAnswerCommentsUseCase.execute({
       answerId,
       pagination: {
         page: 1,
       },
     })
 
-    expect(answerComments).toHaveLength(3)
+    expect(result.isRight()).toBe(true)
+    expect(result.value?.answerComments).toHaveLength(3)
   })
 
   it('should be able to get paginated answer comments', async () => {
@@ -46,13 +46,14 @@ describe('GetAnswerCommentsUseCase', () => {
       }),
     )
 
-    const { answerComments } = await getAnswerCommentsUseCase.execute({
+    const result = await getAnswerCommentsUseCase.execute({
       answerId,
       pagination: {
         page: 2,
       },
     })
 
-    expect(answerComments).toHaveLength(2)
+    expect(result.isRight()).toBe(true)
+    expect(result.value?.answerComments).toHaveLength(2)
   })
 })

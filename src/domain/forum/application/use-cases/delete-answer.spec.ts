@@ -1,9 +1,9 @@
+import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { makeAnswer } from '@/test/factories/make-answer'
 import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
-import { AnswersRepository } from '../repositories/answers-repository'
 import { DeleteAnswerUseCase } from './delete-answer'
 
-let answersRepository: AnswersRepository
+let answersRepository: InMemoryAnswersRepository
 let deleteAnswerUseCase: DeleteAnswerUseCase
 
 describe('DeleteAnswerUseCase', () => {
@@ -17,14 +17,14 @@ describe('DeleteAnswerUseCase', () => {
 
     await answersRepository.create(answer)
 
-    await deleteAnswerUseCase.execute({
+    const result = await deleteAnswerUseCase.execute({
       authorId: answer.authorId.value,
       answerId: answer.id.value,
     })
 
-    const result = await answersRepository.findById(answer.id.value)
-
-    expect(result).toEqual(null)
+    expect(result.isRight()).toBe(true)
+    expect(result.value).toBe(null)
+    expect(answersRepository.items).toHaveLength(0)
   })
 
   it('should not be able to delete a answer from another author', async () => {
@@ -32,11 +32,12 @@ describe('DeleteAnswerUseCase', () => {
 
     await answersRepository.create(answer)
 
-    await expect(() => {
-      return deleteAnswerUseCase.execute({
-        authorId: 'another-author-id',
-        answerId: answer.id.value,
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await deleteAnswerUseCase.execute({
+      authorId: 'another-author-id',
+      answerId: answer.id.value,
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

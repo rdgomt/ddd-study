@@ -1,11 +1,10 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { makeAnswer } from '@/test/factories/make-answer'
 import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
-import { AnswersRepository } from '../repositories/answers-repository'
 import { GetQuestionAnswersUseCase } from './get-question-answers'
 
 const questionId = 'question-id'
-let answersRepository: AnswersRepository
+let answersRepository: InMemoryAnswersRepository
 let getQuestionAnswersUseCase: GetQuestionAnswersUseCase
 
 describe('GetQuestionAnswersUseCase', () => {
@@ -25,14 +24,15 @@ describe('GetQuestionAnswersUseCase', () => {
       }),
     )
 
-    const { answers } = await getQuestionAnswersUseCase.execute({
+    const result = await getQuestionAnswersUseCase.execute({
       questionId,
       pagination: {
         page: 1,
       },
     })
 
-    expect(answers).toHaveLength(3)
+    expect(result.isRight()).toBe(true)
+    expect(result.value?.answers).toHaveLength(3)
   })
 
   it('should be able to get paginated question answers', async () => {
@@ -46,13 +46,14 @@ describe('GetQuestionAnswersUseCase', () => {
       }),
     )
 
-    const { answers } = await getQuestionAnswersUseCase.execute({
+    const result = await getQuestionAnswersUseCase.execute({
       questionId,
       pagination: {
         page: 2,
       },
     })
 
-    expect(answers).toHaveLength(2)
+    expect(result.isRight()).toBe(true)
+    expect(result.value?.answers).toHaveLength(2)
   })
 })

@@ -1,3 +1,5 @@
+import { expect } from 'vitest'
+import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { makeQuestion } from '@/test/factories/make-question'
 import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
 import { EditQuestionUseCase } from './edit-question'
@@ -19,14 +21,20 @@ describe('EditQuestionUseCase', () => {
     const newTitle = 'new-title'
     const newContent = 'new-content'
 
-    await editQuestionUseCase.execute({
+    const result = await editQuestionUseCase.execute({
       questionId: newQuestion.id.value,
       authorId: newQuestion.authorId.value,
       title: newTitle,
       content: newContent,
     })
 
-    expect(questionsRepository.items[0]).toMatchObject({
+    expect(result.isRight()).toBe(true)
+
+    if (!result.isRight()) {
+      return
+    }
+
+    expect(result.value.question).toMatchObject({
       title: newTitle,
       content: newContent,
     })
@@ -37,13 +45,14 @@ describe('EditQuestionUseCase', () => {
 
     await questionsRepository.create(newQuestion)
 
-    await expect(() => {
-      return editQuestionUseCase.execute({
-        questionId: newQuestion.id.value,
-        authorId: 'another-author',
-        title: 'new-title',
-        content: 'new-content',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await editQuestionUseCase.execute({
+      questionId: newQuestion.id.value,
+      authorId: 'another-author',
+      title: 'new-title',
+      content: 'new-content',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

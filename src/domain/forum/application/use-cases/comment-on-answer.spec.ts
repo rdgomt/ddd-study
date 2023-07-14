@@ -5,28 +5,29 @@ import { faker } from '@faker-js/faker'
 import { CommentOnAnswerUseCase } from './comment-on-answer'
 
 const COMMENT_CONTENT = faker.lorem.text()
-let inMemoryAnswersRepository: InMemoryAnswersRepository
-let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let answersRepository: InMemoryAnswersRepository
+let answerCommentsRepository: InMemoryAnswerCommentsRepository
 let commentOnAnswerUseCase: CommentOnAnswerUseCase
 
 describe('CommentOnAnswerUseCase', () => {
   beforeEach(() => {
-    inMemoryAnswersRepository = new InMemoryAnswersRepository()
-    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository()
-    commentOnAnswerUseCase = new CommentOnAnswerUseCase(inMemoryAnswersRepository, inMemoryAnswerCommentsRepository)
+    answersRepository = new InMemoryAnswersRepository()
+    answerCommentsRepository = new InMemoryAnswerCommentsRepository()
+    commentOnAnswerUseCase = new CommentOnAnswerUseCase(answersRepository, answerCommentsRepository)
   })
 
   it('should be able to comment on answer', async () => {
     const answer = makeAnswer()
 
-    await inMemoryAnswersRepository.create(answer)
+    await answersRepository.create(answer)
 
-    await commentOnAnswerUseCase.execute({
+    const result = await commentOnAnswerUseCase.execute({
       answerId: answer.id.value,
       authorId: answer.authorId.value,
       content: COMMENT_CONTENT,
     })
 
-    expect(inMemoryAnswerCommentsRepository.items[0].content).toEqual(COMMENT_CONTENT)
+    expect(result.isRight()).toBe(true)
+    expect(answerCommentsRepository.items[0].content).toEqual(COMMENT_CONTENT)
   })
 })

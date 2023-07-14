@@ -1,4 +1,5 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
+import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { makeAnswer } from '@/test/factories/make-answer'
 import { makeQuestion } from '@/test/factories/make-question'
 import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
@@ -38,11 +39,12 @@ describe('ChooseQuestionBestAnswerUseCase', () => {
     const answer = makeAnswer({ questionId: question.id })
     await answersRepository.create(answer)
 
-    await expect(() => {
-      return chooseQuestionBestAnswerUseCase.execute({
-        authorId: 'another-author',
-        answerId: answer.id.value,
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await chooseQuestionBestAnswerUseCase.execute({
+      authorId: 'another-author',
+      answerId: answer.id.value,
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

@@ -1,11 +1,10 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { makeQuestionComment } from '@/test/factories/make-question-comment'
 import { InMemoryQuestionCommentsRepository } from '@/test/repositories/inm-question-comments-repository'
-import { QuestionCommentsRepository } from '../repositories/question-comments-repository'
 import { GetQuestionCommentsUseCase } from './get-question-comments'
 
 const questionId = 'question-id'
-let questionCommentsRepository: QuestionCommentsRepository
+let questionCommentsRepository: InMemoryQuestionCommentsRepository
 let getQuestionCommentsUseCase: GetQuestionCommentsUseCase
 
 describe('GetQuestionCommentsUseCase', () => {
@@ -25,14 +24,15 @@ describe('GetQuestionCommentsUseCase', () => {
       }),
     )
 
-    const { questionComments } = await getQuestionCommentsUseCase.execute({
+    const result = await getQuestionCommentsUseCase.execute({
       questionId,
       pagination: {
         page: 1,
       },
     })
 
-    expect(questionComments).toHaveLength(3)
+    expect(result.isRight()).toBe(true)
+    expect(result.value?.questionComments).toHaveLength(3)
   })
 
   it('should be able to get paginated question comments', async () => {
@@ -46,13 +46,14 @@ describe('GetQuestionCommentsUseCase', () => {
       }),
     )
 
-    const { questionComments } = await getQuestionCommentsUseCase.execute({
+    const result = await getQuestionCommentsUseCase.execute({
       questionId,
       pagination: {
         page: 2,
       },
     })
 
-    expect(questionComments).toHaveLength(2)
+    expect(result.isRight()).toBe(true)
+    expect(result.value?.questionComments).toHaveLength(2)
   })
 })
