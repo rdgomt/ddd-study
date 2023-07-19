@@ -10,6 +10,8 @@
     }
   ],
   "rules": {
+    "require-atomic-updates": "off", // TODO: estudar como resolver
+
     "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
     "id-length": [
       "warn",

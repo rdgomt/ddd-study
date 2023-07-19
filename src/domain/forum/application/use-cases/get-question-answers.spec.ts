@@ -1,15 +1,18 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { makeAnswer } from '@/test/factories/make-answer'
+import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/inm-answer-attachments-repository'
 import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
 import { GetQuestionAnswersUseCase } from './get-question-answers'
 
 const questionId = 'question-id'
+let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let answersRepository: InMemoryAnswersRepository
 let getQuestionAnswersUseCase: GetQuestionAnswersUseCase
 
 describe('GetQuestionAnswersUseCase', () => {
   beforeEach(() => {
-    answersRepository = new InMemoryAnswersRepository()
+    answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository()
+    answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository)
     getQuestionAnswersUseCase = new GetQuestionAnswersUseCase(answersRepository)
   })
 
