@@ -13,6 +13,16 @@ interface NotificationProps {
 export type CreateNotificationProps = Optional<NotificationProps, 'createdAt'>
 
 export class Notification extends Entity<NotificationProps> {
+  static create(props: CreateNotificationProps, id?: UniqueEntityID) {
+    return new Notification(
+      {
+        ...props,
+        createdAt: props.createdAt ?? new Date(),
+      },
+      id,
+    )
+  }
+
   get content() {
     return this.props.content
   }
@@ -33,13 +43,7 @@ export class Notification extends Entity<NotificationProps> {
     return this.props.title
   }
 
-  static create(props: CreateNotificationProps, id?: UniqueEntityID) {
-    return new Notification(
-      {
-        ...props,
-        createdAt: props.createdAt ?? new Date(),
-      },
-      id,
-    )
+  read() {
+    this.props.readAt = new Date()
   }
 }
