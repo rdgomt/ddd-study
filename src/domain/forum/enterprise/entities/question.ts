@@ -3,10 +3,11 @@ import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { now } from '@/utils/date.utils'
 import { Optional } from '@/utils/typescript.utils'
+import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-chosen-event'
 import { QuestionAttachmentsList } from './question-attachments-list'
 import { Slug } from './value-objects/slug'
 
-const MAX_CONTENT_LENGTH = 120 // TODO: create VO for content
+const EXCERPT_LENGTH = 120
 
 export interface QuestionProps {
   attachments: QuestionAttachmentsList
@@ -52,6 +53,10 @@ export class Question extends AggregateRoot<QuestionProps> {
   }
 
   set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
+    if (bestAnswerId && bestAnswerId !== this.props.bestAnswerId) {
+      this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerId))
+    }
+
     this.props.bestAnswerId = bestAnswerId
     this.touch()
   }
@@ -69,8 +74,9 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.createdAt
   }
 
+  // TODO: create a value object for excerpt
   get excerpt() {
-    return [...this.content.slice(0, MAX_CONTENT_LENGTH).trimEnd(), '...']
+    return `${this.content.slice(0, EXCERPT_LENGTH).trimEnd()}...`
   }
 
   get isNew(): boolean {
