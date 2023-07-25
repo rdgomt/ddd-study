@@ -31,6 +31,6 @@ describe('CommentOnQuestionUseCase', () => {
     })
 
     expect(result.isRight()).toBe(true)
-    expect(questionCommentsRepository.items[0].content).toEqual(COMMENT_CONTENT)
+    expect(questionCommentsRepository.items[0]?.content).toEqual(COMMENT_CONTENT)
   })
 })

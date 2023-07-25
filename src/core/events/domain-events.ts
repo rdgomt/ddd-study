@@ -50,7 +50,7 @@ export class DomainEvents {
       this.handlersMap[eventClassName] = []
     }
 
-    this.handlersMap[eventClassName].push(callback)
+    this.handlersMap[eventClassName]?.push(callback)
   }
 
   public static clearHandlers() {
@@ -66,7 +66,7 @@ export class DomainEvents {
     const isEventRegistered = eventClassName in this.handlersMap
 
     if (isEventRegistered) {
-      const handlers = this.handlersMap[eventClassName]
+      const handlers = this.handlersMap[eventClassName] ?? []
 
       for (const handler of handlers) {
         handler(event)

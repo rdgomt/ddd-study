@@ -52,9 +52,9 @@ describe('EditAnswerUseCase', () => {
       content: newContent,
     })
 
-    expect(answersRepository.items[0].attachments.currentItems).toHaveLength(2)
+    expect(answersRepository.items[0]?.attachments.currentItems).toHaveLength(2)
 
-    expect(answersRepository.items[0].attachments.currentItems).toEqual([
+    expect(answersRepository.items[0]?.attachments.currentItems).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityID('3') }),
     ])

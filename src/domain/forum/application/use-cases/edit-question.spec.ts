@@ -56,9 +56,9 @@ describe('EditQuestionUseCase', () => {
       content: newContent,
     })
 
-    expect(questionsRepository.items[0].attachments.currentItems).toHaveLength(2)
+    expect(questionsRepository.items[0]?.attachments.currentItems).toHaveLength(2)
 
-    expect(questionsRepository.items[0].attachments.currentItems).toEqual([
+    expect(questionsRepository.items[0]?.attachments.currentItems).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityID('3') }),
     ])

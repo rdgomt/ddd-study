@@ -25,9 +25,9 @@ describe('AnswerQuestionUseCase', () => {
     expect(result.isRight()).toBe(true)
     expect(answersRepository.items[0]).toEqual(result.value?.answer)
 
-    expect(answersRepository.items[0].attachments.currentItems).toHaveLength(2)
+    expect(answersRepository.items[0]?.attachments.currentItems).toHaveLength(2)
 
-    expect(answersRepository.items[0].attachments.currentItems).toEqual([
+    expect(answersRepository.items[0]?.attachments.currentItems).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityID('2') }),
     ])
