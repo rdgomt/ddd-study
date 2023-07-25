@@ -736,6 +736,11 @@
   resolved "https://registry.yarnpkg.com/@tanstack/eslint-plugin-query/-/eslint-plugin-query-4.29.9.tgz#1635e7d60975bcff8bf10f1015d77ea3ce3db260"
   integrity sha512-JlIZcs+zhl/ihta49iIbMCf3E8tSvGDqMIH+oItnYLOzWI7oiujXu7FYgna2E1V79KhR0PaxkPX6jHZLpvacgw==
 
+"@total-typescript/ts-reset@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@total-typescript/ts-reset/-/ts-reset-0.4.2.tgz#c564c173ba09973968e1046c93965b7a257878a4"
+  integrity sha512-vqd7ZUDSrXFVT1n8b2kc3LnklncDQFPvR58yUS1kEP23/nHPAO9l1lMjUfnPrXYYk4Hj54rrLKMW5ipwk7k09A==
+
 "@types/chai-subset@^1.3.3":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@types/chai-subset/-/chai-subset-1.3.3.tgz#97893814e92abd2c534de422cb377e0e0bdaac94"
