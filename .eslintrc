@@ -1,31 +1,14 @@
 {
-  "extends": "@rdgomt/eslint-config",
-  "overrides": [
-    {
-      "files": ["*.spec.ts", "*.test.ts"],
-      "rules": {
-        "max-lines-per-function": "off",
-        "no-magic-numbers": "off",
-        "no-new": "off"
-      }
-    }
-  ],
+  "extends": ["@rdgomt/eslint-config"],
+  "plugins": ["perfectionist"],
   "rules": {
     "require-atomic-updates": "off", // TODO: estudar como resolver
-
     "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
-    "id-length": [
-      "warn",
-      {
-        "min": 2,
-        "exceptions": ["a", "b", "x", "y"]
-      }
-    ],
+    "max-statements": "off",
     "padding-line-between-statements": [
       "warn",
       {
         "blankLine": "always",
-        "prev": "*",
         "next": [
           "block",
           "break",
@@ -50,15 +33,26 @@
           "try",
           "while",
           "with"
-        ]
+        ],
+        "prev": "*"
       },
       {
         "blankLine": "never",
-        "prev": ["singleline-const", "singleline-let", "singleline-var"],
-        "next": ["singleline-const", "singleline-let", "singleline-var"]
+        "next": ["singleline-const", "singleline-let", "singleline-var"],
+        "prev": ["singleline-const", "singleline-let", "singleline-var"]
       }
     ],
-    "max-statements": "off",
-    "typescript-sort-keys/interface": "warn"
+
+    "perfectionist/sort-array-includes": "warn",
+    "perfectionist/sort-classes": "off",
+    "perfectionist/sort-enums": "warn",
+    "perfectionist/sort-interfaces": "warn",
+    "perfectionist/sort-jsx-props": "warn",
+    "perfectionist/sort-map-elements": "warn",
+    "perfectionist/sort-named-imports": "warn",
+    "perfectionist/sort-object-types": "warn",
+    "perfectionist/sort-objects": "warn",
+    "perfectionist/sort-union-types": "off",
+    "typescript-sort-keys/interface": "off"
   }
 }

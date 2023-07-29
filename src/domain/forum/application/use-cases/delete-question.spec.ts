@@ -24,12 +24,12 @@ describe('DeleteQuestionUseCase', () => {
 
     questionAttachmentsRepository.items.push(
       makeQuestionAttachment({
-        questionId: question.id,
         attachmentId: new UniqueEntityID('1'),
+        questionId: question.id,
       }),
       makeQuestionAttachment({
-        questionId: question.id,
         attachmentId: new UniqueEntityID('2'),
+        questionId: question.id,
       }),
     )
 

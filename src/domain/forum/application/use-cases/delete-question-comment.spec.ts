@@ -19,8 +19,8 @@ describe('DeleteQuestionCommentUseCase', () => {
     await questionCommentsRepository.create(questionComment)
 
     const result = await deleteQuestionCommentUseCase.execute({
-      questionCommentId: questionComment.id.value,
       authorId: questionComment.authorId.value,
+      questionCommentId: questionComment.id.value,
     })
 
     expect(result.isRight()).toBe(true)
@@ -36,8 +36,8 @@ describe('DeleteQuestionCommentUseCase', () => {
     await questionCommentsRepository.create(questionComment)
 
     const result = await deleteQuestionCommentUseCase.execute({
-      questionCommentId: questionComment.id.value,
       authorId: 'author-2',
+      questionCommentId: questionComment.id.value,
     })
 
     expect(result.isLeft()).toBe(true)

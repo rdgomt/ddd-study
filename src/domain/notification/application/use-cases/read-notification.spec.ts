@@ -19,8 +19,8 @@ describe('Send Notification', () => {
     await notificationsRepository.create(notification)
 
     const result = await readNotificationUseCase.execute({
-      recipientId: notification.recipientId.value,
       notificationId: notification.id.value,
+      recipientId: notification.recipientId.value,
     })
 
     expect(result.isRight()).toBe(true)

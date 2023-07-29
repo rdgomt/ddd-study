@@ -6,8 +6,8 @@ export function makeAnswer(override?: Partial<AnswerProps>, id?: UniqueEntityID)
   return Answer.create(
     {
       authorId: new UniqueEntityID(),
-      questionId: new UniqueEntityID(),
       content: faker.lorem.text(),
+      questionId: new UniqueEntityID(),
       ...override,
     },
     id,

@@ -31,8 +31,8 @@ describe('ChooseQuestionBestAnswerUseCase', () => {
     await answersRepository.create(answer)
 
     await chooseQuestionBestAnswerUseCase.execute({
-      authorId: question.authorId.value,
       answerId: answer.id.value,
+      authorId: question.authorId.value,
     })
 
     expect(questionsRepository.items[0]?.bestAnswerId).toEqual(answer.id)
@@ -46,8 +46,8 @@ describe('ChooseQuestionBestAnswerUseCase', () => {
     await answersRepository.create(answer)
 
     const result = await chooseQuestionBestAnswerUseCase.execute({
-      authorId: 'another-author',
       answerId: answer.id.value,
+      authorId: 'another-author',
     })
 
     expect(result.isLeft()).toBe(true)

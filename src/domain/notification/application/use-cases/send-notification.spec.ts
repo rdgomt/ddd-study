@@ -12,9 +12,9 @@ describe('Send Notification', () => {
 
   it('should be able to send a notification', async () => {
     const result = await sendNotificationUseCase.execute({
+      content: 'Conteúdo da notificação',
       recipientId: '1',
       title: 'Nova notificação',
-      content: 'Conteúdo da notificação',
     })
 
     expect(result.isRight()).toBe(true)

@@ -28,10 +28,10 @@ describe('GetQuestionAnswersUseCase', () => {
     )
 
     const result = await getQuestionAnswersUseCase.execute({
-      questionId,
       pagination: {
         page: 1,
       },
+      questionId,
     })
 
     expect(result.isRight()).toBe(true)
@@ -50,10 +50,10 @@ describe('GetQuestionAnswersUseCase', () => {
     )
 
     const result = await getQuestionAnswersUseCase.execute({
-      questionId,
       pagination: {
         page: 2,
       },
+      questionId,
     })
 
     expect(result.isRight()).toBe(true)

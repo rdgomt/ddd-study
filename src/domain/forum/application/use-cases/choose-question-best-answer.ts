@@ -22,7 +22,7 @@ type ChooseQuestionBestAnswerUseCaseOutput = Promise<
 export class ChooseQuestionBestAnswerUseCase {
   constructor(private answersRepository: AnswersRepository, private questionsRepository: QuestionsRepository) {}
 
-  async execute({ authorId, answerId }: ChooseQuestionBestAnswerUseCaseInput): ChooseQuestionBestAnswerUseCaseOutput {
+  async execute({ answerId, authorId }: ChooseQuestionBestAnswerUseCaseInput): ChooseQuestionBestAnswerUseCaseOutput {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {

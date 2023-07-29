@@ -26,7 +26,7 @@ export class CommentOnAnswerUseCase {
     private answerCommentsRepository: AnswerCommentsRepository,
   ) {}
 
-  async execute({ authorId, answerId, content }: CommentOnAnswerUseCaseInput): CommentOnAnswerUseCaseOutput {
+  async execute({ answerId, authorId, content }: CommentOnAnswerUseCaseInput): CommentOnAnswerUseCaseOutput {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {
@@ -34,8 +34,8 @@ export class CommentOnAnswerUseCase {
     }
 
     const answerComment = AnswerComment.create({
-      authorId: new UniqueEntityID(authorId),
       answerId: new UniqueEntityID(answerId),
+      authorId: new UniqueEntityID(authorId),
       content,
     })
 

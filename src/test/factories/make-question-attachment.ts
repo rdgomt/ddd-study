@@ -4,8 +4,8 @@ import { QuestionAttachment, QuestionAttachmentProps } from '@/domain/forum/ente
 export function makeQuestionAttachment(override?: Partial<QuestionAttachmentProps>, id?: UniqueEntityID) {
   return QuestionAttachment.create(
     {
-      questionId: new UniqueEntityID(),
       attachmentId: new UniqueEntityID(),
+      questionId: new UniqueEntityID(),
       ...override,
     },
     id,

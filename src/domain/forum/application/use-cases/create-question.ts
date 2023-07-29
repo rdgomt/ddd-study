@@ -27,13 +27,13 @@ export class CreateQuestionUseCase {
   async execute({
     attachmentsIds = [],
     authorId,
-    title,
     content,
+    title,
   }: CreateQuestionUseCaseInput): CreateQuestionUseCaseOutput {
     const question = Question.create({
       authorId: new UniqueEntityID(authorId),
-      title,
       content,
+      title,
     })
 
     const questionAttachments = attachmentsIds.map((attachmentId) => {

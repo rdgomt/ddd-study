@@ -16,10 +16,10 @@ describe('AnswerQuestionUseCase', () => {
 
   it('should be able to answer a question', async () => {
     const result = await createAnswerUseCase.execute({
-      questionId: 'questionId',
-      instructorId: 'instructorId',
-      content: 'content',
       attachmentsIds: ['1', '2'],
+      content: 'content',
+      instructorId: 'instructorId',
+      questionId: 'questionId',
     })
 
     expect(result.isRight()).toBe(true)

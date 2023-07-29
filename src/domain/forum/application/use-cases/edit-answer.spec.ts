@@ -37,9 +37,9 @@ describe('EditAnswerUseCase', () => {
 
     const result = await editAnswerUseCase.execute({
       answerId: newAnswer.id.value,
+      attachmentsIds: ['1', '3'],
       authorId: newAnswer.authorId.value,
       content: newContent,
-      attachmentsIds: ['1', '3'],
     })
 
     expect(result.isRight()).toBe(true)
@@ -67,9 +67,9 @@ describe('EditAnswerUseCase', () => {
 
     const result = await editAnswerUseCase.execute({
       answerId: newAnswer.id.value,
+      attachmentsIds: [],
       authorId: 'another-author',
       content: 'new-content',
-      attachmentsIds: [],
     })
 
     expect(result.isLeft()).toBe(true)

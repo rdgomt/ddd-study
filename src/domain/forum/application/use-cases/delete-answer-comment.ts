@@ -13,7 +13,7 @@ type DeleteAnswerCommentUseCaseOutput = Promise<Either<ResourceNotFoundError | N
 export class DeleteAnswerCommentUseCase {
   constructor(private answerCommentsRepository: AnswerCommentsRepository) {}
 
-  async execute({ authorId, answerCommentId }: DeleteAnswerCommentUseCaseInput): DeleteAnswerCommentUseCaseOutput {
+  async execute({ answerCommentId, authorId }: DeleteAnswerCommentUseCaseInput): DeleteAnswerCommentUseCaseOutput {
     const answerComment = await this.answerCommentsRepository.findById(answerCommentId)
 
     if (!answerComment) {

@@ -1,2 +1,3 @@
+- Setup husky + commitlint + lint-staged
 - Disparar notificação quando uma pergunta receber um comentário.
 - Disparar notificação quando uma resposta receber um comentário.

@@ -26,7 +26,7 @@ export class CommentOnQuestionUseCase {
     private questionCommentsRepository: QuestionCommentsRepository,
   ) {}
 
-  async execute({ authorId, questionId, content }: CommentOnQuestionUseCaseInput): CommentOnQuestionUseCaseOutput {
+  async execute({ authorId, content, questionId }: CommentOnQuestionUseCaseInput): CommentOnQuestionUseCaseOutput {
     const question = await this.questionsRepository.findById(questionId)
 
     if (!question) {
@@ -35,8 +35,8 @@ export class CommentOnQuestionUseCase {
 
     const questionComment = QuestionComment.create({
       authorId: new UniqueEntityID(authorId),
-      questionId: new UniqueEntityID(questionId),
       content,
+      questionId: new UniqueEntityID(questionId),
     })
 
     await this.questionCommentsRepository.create(questionComment)

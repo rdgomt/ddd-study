@@ -21,11 +21,11 @@ export type SendNotificationUseCaseOutput = Promise<
 export class SendNotificationUseCase {
   constructor(private notificationsRepository: NotificationsRepository) {}
 
-  async execute({ recipientId, title, content }: SendNotificationUseCaseInput): SendNotificationUseCaseOutput {
+  async execute({ content, recipientId, title }: SendNotificationUseCaseInput): SendNotificationUseCaseOutput {
     const notification = Notification.create({
+      content,
       recipientId: new UniqueEntityID(recipientId),
       title,
-      content,
     })
 
     await this.notificationsRepository.create(notification)

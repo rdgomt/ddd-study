@@ -20,7 +20,7 @@ type GetQuestionAnswersUseCaseOutput = Promise<
 export class GetQuestionAnswersUseCase {
   constructor(private answersRepository: AnswersRepository) {}
 
-  async execute({ questionId, pagination }: GetQuestionAnswersUseCaseInput): GetQuestionAnswersUseCaseOutput {
+  async execute({ pagination, questionId }: GetQuestionAnswersUseCaseInput): GetQuestionAnswersUseCaseOutput {
     const answers = await this.answersRepository.findManyByQuestionId(questionId, { page: pagination.page })
 
     return right({

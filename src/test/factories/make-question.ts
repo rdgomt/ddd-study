@@ -6,8 +6,8 @@ export function makeQuestion(override?: Partial<CreateQuestionProps>, id?: Uniqu
   return Question.create(
     {
       authorId: new UniqueEntityID(),
-      title: faker.lorem.sentence(),
       content: faker.lorem.text(),
+      title: faker.lorem.sentence(),
       ...override,
     },
     id,

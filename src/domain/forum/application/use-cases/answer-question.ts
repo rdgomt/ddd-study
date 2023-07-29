@@ -31,15 +31,15 @@ export class AnswerQuestionUseCase {
     questionId,
   }: AnswerQuestionUseCaseInput): AnswerQuestionUseCaseOutput {
     const answer = Answer.create({
-      content,
       authorId: new UniqueEntityID(instructorId),
+      content,
       questionId: new UniqueEntityID(questionId),
     })
 
     const answerAttachments = attachmentsIds.map((attachmentId) => {
       return AnswerAttachment.create({
-        attachmentId: new UniqueEntityID(attachmentId),
         answerId: answer.id,
+        attachmentId: new UniqueEntityID(attachmentId),
       })
     })
 

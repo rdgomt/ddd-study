@@ -13,7 +13,7 @@ type DeleteAnswerUseCaseOutput = Promise<Either<ResourceNotFoundError | NotAllow
 export class DeleteAnswerUseCase {
   constructor(private answersRepository: AnswersRepository) {}
 
-  async execute({ authorId, answerId }: DeleteAnswerUseCaseInput): DeleteAnswerUseCaseOutput {
+  async execute({ answerId, authorId }: DeleteAnswerUseCaseInput): DeleteAnswerUseCaseOutput {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {

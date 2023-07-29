@@ -28,21 +28,21 @@ describe('EditQuestionUseCase', () => {
 
     questionAttachmentsRepository.items.push(
       makeQuestionAttachment({
-        questionId: newQuestion.id,
         attachmentId: new UniqueEntityID('1'),
+        questionId: newQuestion.id,
       }),
       makeQuestionAttachment({
-        questionId: newQuestion.id,
         attachmentId: new UniqueEntityID('2'),
+        questionId: newQuestion.id,
       }),
     )
 
     const result = await editQuestionUseCase.execute({
-      questionId: newQuestion.id.value,
-      authorId: newQuestion.authorId.value,
-      title: newTitle,
-      content: newContent,
       attachmentsIds: ['1', '3'],
+      authorId: newQuestion.authorId.value,
+      content: newContent,
+      questionId: newQuestion.id.value,
+      title: newTitle,
     })
 
     expect(result.isRight()).toBe(true)
@@ -52,8 +52,8 @@ describe('EditQuestionUseCase', () => {
     }
 
     expect(result.value.question).toMatchObject({
-      title: newTitle,
       content: newContent,
+      title: newTitle,
     })
 
     expect(questionsRepository.items[0]?.attachments.currentItems).toHaveLength(2)
@@ -70,11 +70,11 @@ describe('EditQuestionUseCase', () => {
     await questionsRepository.create(newQuestion)
 
     const result = await editQuestionUseCase.execute({
-      questionId: newQuestion.id.value,
-      authorId: 'another-author',
-      title: 'new-title',
-      content: 'new-content',
       attachmentsIds: [],
+      authorId: 'another-author',
+      content: 'new-content',
+      questionId: newQuestion.id.value,
+      title: 'new-title',
     })
 
     expect(result.isLeft()).toBe(true)

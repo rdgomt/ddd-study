@@ -34,8 +34,8 @@ describe('DeleteAnswerUseCase', () => {
     )
 
     const result = await deleteAnswerUseCase.execute({
-      authorId: answer.authorId.value,
       answerId: answer.id.value,
+      authorId: answer.authorId.value,
     })
 
     expect(result.isRight()).toBe(true)
@@ -50,8 +50,8 @@ describe('DeleteAnswerUseCase', () => {
     await answersRepository.create(answer)
 
     const result = await deleteAnswerUseCase.execute({
-      authorId: 'another-author-id',
       answerId: answer.id.value,
+      authorId: 'another-author-id',
     })
 
     expect(result.isLeft()).toBe(true)

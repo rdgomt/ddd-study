@@ -2,24 +2,24 @@
 class Left<L, R> {
   constructor(public readonly value: L) {}
 
-  isRight(): this is Right<L, R> {
-    return false
-  }
-
   isLeft(): this is Left<L, R> {
     return true
+  }
+
+  isRight(): this is Right<L, R> {
+    return false
   }
 }
 
 class Right<L, R> {
   constructor(public readonly value: R) {}
 
-  isRight(): this is Right<L, R> {
-    return true
-  }
-
   isLeft(): this is Left<L, R> {
     return false
+  }
+
+  isRight(): this is Right<L, R> {
+    return true
   }
 }
 

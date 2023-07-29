@@ -17,14 +17,14 @@ export class OnQuestionBestAnswerChosen implements EventHandler {
     )
   }
 
-  private async sendQuestionBestAnswerNotification({ question, bestAnswerId }: QuestionBestAnswerChosenEvent) {
+  private async sendQuestionBestAnswerNotification({ bestAnswerId, question }: QuestionBestAnswerChosenEvent) {
     const answer = await this.answersRepository.findById(bestAnswerId.value)
 
     if (answer) {
       await this.sendNotification.execute({
+        content: `A resposta que você enviou em "${question.title}" foi escolhida pelo autor!"`,
         recipientId: answer.authorId.value,
         title: `Sua resposta foi escolhida!`,
-        content: `A resposta que você enviou em "${question.title}" foi escolhida pelo autor!"`,
       })
     }
   }

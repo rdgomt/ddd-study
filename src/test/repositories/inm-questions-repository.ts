@@ -11,10 +11,6 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 
   constructor(private questionAttachmentsRepository: QuestionAttachmentsRepository) {}
 
-  private findIndexById(id: string) {
-    return this.items.findIndex((item) => item.id.value === id)
-  }
-
   async create(question: Question) {
     this.items.push(question)
     DomainEvents.dispatchEventsForAggregate(question.id)
@@ -34,8 +30,13 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     return this.items.find((item) => item.slug.value === slug) || null
   }
 
+  private findIndexById(id: string) {
+    return this.items.findIndex((item) => item.id.value === id)
+  }
+
   async findManyRecent({ page }: PaginationParams) {
     return this.items
+      .map((item) => item)
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
   }

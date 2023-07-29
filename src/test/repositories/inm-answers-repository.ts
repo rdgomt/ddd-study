@@ -11,10 +11,6 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 
   constructor(private answerAttachmentsRepository: AnswerAttachmentsRepository) {}
 
-  private findIndexById(id: string) {
-    return this.items.findIndex((item) => item.id.value === id)
-  }
-
   async create(answer: Answer) {
     this.items.push(answer)
     DomainEvents.dispatchEventsForAggregate(answer.id)
@@ -28,6 +24,10 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 
   async findById(answerId: string) {
     return this.items.find((item) => item.id.value === answerId) || null
+  }
+
+  private findIndexById(id: string) {
+    return this.items.findIndex((item) => item.id.value === id)
   }
 
   async findManyByQuestionId(questionId: string, { page }: PaginationParams) {

@@ -25,9 +25,9 @@ export class OnAnswerCreated implements EventHandler {
     }
 
     await this.sendNotification.execute({
+      content: answer.excerpt,
       recipientId: question.authorId.value,
       title: `Nova resposta em "${question.title}"`,
-      content: answer.excerpt,
     })
   }
 }

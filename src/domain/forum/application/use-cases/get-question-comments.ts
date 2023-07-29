@@ -20,7 +20,7 @@ type GetQuestionCommentsUseCaseOutput = Promise<
 export class GetQuestionCommentsUseCase {
   constructor(private questionCommentsRepository: QuestionCommentsRepository) {}
 
-  async execute({ questionId, pagination }: GetQuestionCommentsUseCaseInput): GetQuestionCommentsUseCaseOutput {
+  async execute({ pagination, questionId }: GetQuestionCommentsUseCaseInput): GetQuestionCommentsUseCaseOutput {
     const questionComments = await this.questionCommentsRepository.findManyByQuestionId(questionId, {
       page: pagination.page,
     })

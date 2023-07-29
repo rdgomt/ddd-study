@@ -15,10 +15,10 @@ describe('CreateQuestionUseCase', () => {
 
   it('should be able to create a question', async () => {
     const result = await createQuestionUseCase.execute({
-      authorId: 'authorId',
-      title: 'title',
-      content: 'content',
       attachmentsIds: ['1', '2'],
+      authorId: 'authorId',
+      content: 'content',
+      title: 'title',
     })
 
     expect(result.isRight()).toBe(true)

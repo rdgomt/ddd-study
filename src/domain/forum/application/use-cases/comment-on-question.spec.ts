@@ -25,9 +25,9 @@ describe('CommentOnQuestionUseCase', () => {
     await questionsRepository.create(question)
 
     const result = await commentOnQuestionUseCase.execute({
-      questionId: question.id.value,
       authorId: question.authorId.value,
       content: COMMENT_CONTENT,
+      questionId: question.id.value,
     })
 
     expect(result.isRight()).toBe(true)
