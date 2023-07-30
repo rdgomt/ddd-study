@@ -1,13 +1,12 @@
 import dayjs from 'dayjs'
 import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
+import { Excerpt } from '@/domain/forum/enterprise/entities/value-objects/excerpt'
 import { now } from '@/utils/date.utils'
 import { Optional } from '@/utils/typescript.utils'
 import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-chosen-event'
 import { QuestionAttachmentsList } from './question-attachments-list'
 import { Slug } from './value-objects/slug'
-
-const EXCERPT_LENGTH = 120
 
 export interface QuestionProps {
   attachments: QuestionAttachmentsList
@@ -74,9 +73,8 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.createdAt
   }
 
-  // TODO: create a value object for excerpt
   get excerpt() {
-    return `${this.content.slice(0, EXCERPT_LENGTH).trimEnd()}...`
+    return new Excerpt(this.content).value
   }
 
   get isNew(): boolean {
