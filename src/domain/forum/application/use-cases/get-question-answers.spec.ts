@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
-import { makeAnswer } from '@/test/factories/make-answer'
-import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/inm-answer-attachments-repository'
-import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
+import { makeAnswer } from '@/tests/factories/make-answer'
+import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/inm-answer-attachments-repository'
+import { InMemoryAnswersRepository } from '@/tests/repositories/inm-answers-repository'
 import { GetQuestionAnswersUseCase } from './get-question-answers'
 
 const questionId = 'question-id'

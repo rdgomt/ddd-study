@@ -1,6 +1,6 @@
-import { makeQuestion } from '@/test/factories/make-question'
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/inm-question-attachments-repository'
-import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
+import { makeQuestion } from '@/tests/factories/make-question'
+import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
+import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
 import { GetRecentQuestionsUseCase } from './get-recent-questions'
 
 let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository

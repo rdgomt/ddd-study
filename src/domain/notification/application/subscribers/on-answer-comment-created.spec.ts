@@ -1,12 +1,12 @@
 import { SpyInstance } from 'vitest'
 import { OnAnswerCommentCreated } from '@/domain/notification/application/subscribers/on-answer-comment-created'
-import { makeAnswer } from '@/test/factories/make-answer'
-import { makeAnswerComment } from '@/test/factories/make-answer-comment'
-import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/inm-answer-attachments-repository'
-import { InMemoryAnswerCommentsRepository } from '@/test/repositories/inm-answer-comments-repository'
-import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
-import { InMemoryNotificationsRepository } from '@/test/repositories/inm-notifications-repository'
-import { waitFor } from '@/test/utils/wait-for'
+import { makeAnswer } from '@/tests/factories/make-answer'
+import { makeAnswerComment } from '@/tests/factories/make-answer-comment'
+import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/inm-answer-attachments-repository'
+import { InMemoryAnswerCommentsRepository } from '@/tests/repositories/inm-answer-comments-repository'
+import { InMemoryAnswersRepository } from '@/tests/repositories/inm-answers-repository'
+import { InMemoryNotificationsRepository } from '@/tests/repositories/inm-notifications-repository'
+import { waitFor } from '@/tests/utils/wait-for'
 import {
   SendNotificationUseCase,
   SendNotificationUseCaseInput,

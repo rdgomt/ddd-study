@@ -1,12 +1,12 @@
 import { SpyInstance } from 'vitest'
 import { OnQuestionCommentCreated } from '@/domain/notification/application/subscribers/on-question-comment-created'
-import { makeQuestion } from '@/test/factories/make-question'
-import { makeQuestionComment } from '@/test/factories/make-question-comment'
-import { InMemoryNotificationsRepository } from '@/test/repositories/inm-notifications-repository'
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/inm-question-attachments-repository'
-import { InMemoryQuestionCommentsRepository } from '@/test/repositories/inm-question-comments-repository'
-import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
-import { waitFor } from '@/test/utils/wait-for'
+import { makeQuestion } from '@/tests/factories/make-question'
+import { makeQuestionComment } from '@/tests/factories/make-question-comment'
+import { InMemoryNotificationsRepository } from '@/tests/repositories/inm-notifications-repository'
+import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
+import { InMemoryQuestionCommentsRepository } from '@/tests/repositories/inm-question-comments-repository'
+import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
+import { waitFor } from '@/tests/utils/wait-for'
 import {
   SendNotificationUseCase,
   SendNotificationUseCaseInput,

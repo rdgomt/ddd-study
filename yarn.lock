@@ -884,10 +884,10 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
-"@rdgomt/eslint-config@latest":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@rdgomt/eslint-config/-/eslint-config-1.6.0.tgz#c0fefa9822905944e6fefed2200fd812fb13602e"
-  integrity sha512-KCFt3lmoWSd0AWNZU6E0+5FGUnFar3NpSJ7+jQ49LXmmyzN+DJ5pk86GUWpm7ZjXeRe0HQeVPX/IRq+6RdL5iQ==
+"@rdgomt/eslint-config@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@rdgomt/eslint-config/-/eslint-config-1.6.1.tgz#a07341f1d91a37b4463eb43223a1d49d7b5c1bcd"
+  integrity sha512-W6t45zmJUHpPO8rLoJ7C+s7HhttMRHKVKX89TondnVAcDhi0wRpH0HRQ+dSR+tTendxFXYnrIqoEtD8u18SNrQ==
   dependencies:
     "@tanstack/eslint-plugin-query" "^4.29.9"
     "@typescript-eslint/eslint-plugin" "^5.61.0"

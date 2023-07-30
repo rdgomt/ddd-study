@@ -1,6 +1,6 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
-import { makeQuestionComment } from '@/test/factories/make-question-comment'
-import { InMemoryQuestionCommentsRepository } from '@/test/repositories/inm-question-comments-repository'
+import { makeQuestionComment } from '@/tests/factories/make-question-comment'
+import { InMemoryQuestionCommentsRepository } from '@/tests/repositories/inm-question-comments-repository'
 import { GetQuestionCommentsUseCase } from './get-question-comments'
 
 const questionId = 'question-id'

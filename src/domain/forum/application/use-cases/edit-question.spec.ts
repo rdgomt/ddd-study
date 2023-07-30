@@ -1,10 +1,10 @@
 import { expect } from 'vitest'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
-import { makeQuestion } from '@/test/factories/make-question'
-import { makeQuestionAttachment } from '@/test/factories/make-question-attachment'
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/inm-question-attachments-repository'
-import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
+import { makeQuestion } from '@/tests/factories/make-question'
+import { makeQuestionAttachment } from '@/tests/factories/make-question-attachment'
+import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
+import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
 import { EditQuestionUseCase } from './edit-question'
 
 let questionsRepository: InMemoryQuestionsRepository

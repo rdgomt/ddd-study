@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
-import { makeNotification } from '@/test/factories/make-notification'
-import { InMemoryNotificationsRepository } from '@/test/repositories/inm-notifications-repository'
+import { makeNotification } from '@/tests/factories/make-notification'
+import { InMemoryNotificationsRepository } from '@/tests/repositories/inm-notifications-repository'
 import { ReadNotificationUseCase } from './read-notification'
 
 let notificationsRepository: InMemoryNotificationsRepository

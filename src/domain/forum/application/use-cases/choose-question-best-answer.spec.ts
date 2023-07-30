@@ -1,11 +1,11 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
-import { makeAnswer } from '@/test/factories/make-answer'
-import { makeQuestion } from '@/test/factories/make-question'
-import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/inm-answer-attachments-repository'
-import { InMemoryAnswersRepository } from '@/test/repositories/inm-answers-repository'
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/inm-question-attachments-repository'
-import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
+import { makeAnswer } from '@/tests/factories/make-answer'
+import { makeQuestion } from '@/tests/factories/make-question'
+import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/inm-answer-attachments-repository'
+import { InMemoryAnswersRepository } from '@/tests/repositories/inm-answers-repository'
+import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
+import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer'
 
 let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository

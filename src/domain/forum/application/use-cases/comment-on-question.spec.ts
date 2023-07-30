@@ -1,7 +1,7 @@
-import { makeQuestion } from '@/test/factories/make-question'
-import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/inm-question-attachments-repository'
-import { InMemoryQuestionCommentsRepository } from '@/test/repositories/inm-question-comments-repository'
-import { InMemoryQuestionsRepository } from '@/test/repositories/inm-questions-repository'
+import { makeQuestion } from '@/tests/factories/make-question'
+import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
+import { InMemoryQuestionCommentsRepository } from '@/tests/repositories/inm-question-comments-repository'
+import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
 import { faker } from '@faker-js/faker'
 import { CommentOnQuestionUseCase } from './comment-on-question'
 
