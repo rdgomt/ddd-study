@@ -20,8 +20,6 @@ export class OnQuestionCommentCreated implements EventHandler {
   private async sendNewQuestionCommentNotification({ questionComment }: QuestionCommentCreatedEvent) {
     const question = await this.questionsRepository.findById(questionComment.questionId.value)
 
-    console.log('aqui')
-
     if (!question) {
       return
     }

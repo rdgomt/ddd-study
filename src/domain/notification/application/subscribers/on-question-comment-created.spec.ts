@@ -39,9 +39,6 @@ describe('OnQuestionCommentCreated', () => {
     await questionsRepository.create(question)
     await questionCommentsRepository.create(questionComment)
 
-    console.log('question', question)
-    console.log('questionComment', questionComment)
-
     await waitFor(() => {
       expect(sendNotificationSpy).toHaveBeenCalled()
     })

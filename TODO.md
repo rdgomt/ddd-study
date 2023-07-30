@@ -1,1 +1,1 @@
-- Disparar notificação quando uma resposta receber um comentário.
+- Create value object for excerpts
