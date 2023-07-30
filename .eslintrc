@@ -1,8 +1,42 @@
 {
-  "extends": ["@rdgomt/eslint-config"],
-  "plugins": ["perfectionist"],
+  "extends": ["@rdgomt/eslint-config", "plugin:boundaries/strict"],
+  "plugins": ["boundaries", "perfectionist"],
   "rules": {
+    "boundaries/element-types": [
+      "error",
+      {
+        "default": "disallow",
+        "rules": [
+          {
+            "from": "core",
+            "allow": ["core", "types", "utils"]
+          },
+          {
+            "from": "domain",
+            "allow": ["*"]
+          },
+          {
+            "from": "tests",
+            "allow": ["*"]
+          },
+          {
+            "from": "types",
+            "allow": []
+          },
+          {
+            "from": "utils",
+            "allow": []
+          }
+        ]
+      }
+    ],
+    "boundaries/no-ignored": "error",
+    "boundaries/no-private": "error",
+    "boundaries/no-unknown-files": "error",
+    "boundaries/no-unknown": "error",
+
     "require-atomic-updates": "off", // TODO: estudar como resolver
+
     "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
     "max-statements": "off",
     "padding-line-between-statements": [
@@ -54,5 +88,30 @@
     "perfectionist/sort-objects": "warn",
     "perfectionist/sort-union-types": "off",
     "typescript-sort-keys/interface": "off"
+  },
+  "settings": {
+    "boundaries/elements": [
+      {
+        "type": "core",
+        "pattern": "src/core"
+      },
+      {
+        "type": "domain",
+        "pattern": "src/domain"
+      },
+      {
+        "type": "tests",
+        "pattern": "src/tests"
+      },
+      {
+        "type": "types",
+        "pattern": "src/types"
+      },
+      {
+        "type": "utils",
+        "pattern": "src/utils/*"
+      }
+    ],
+    "boundaries/include": ["src/**/*"]
   }
 }

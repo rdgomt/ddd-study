@@ -1,5 +1,5 @@
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
-import { Optional } from '@/utils/typescript.utils'
+import { Optional } from '@/utils/typescript/types'
 import { AnswerCommentCreatedEvent } from '../events/answer-comment-created-event'
 import { Comment, CommentProps } from './comment'
 

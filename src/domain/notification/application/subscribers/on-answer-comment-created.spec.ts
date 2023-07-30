@@ -6,7 +6,7 @@ import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/inm-an
 import { InMemoryAnswerCommentsRepository } from '@/tests/repositories/inm-answer-comments-repository'
 import { InMemoryAnswersRepository } from '@/tests/repositories/inm-answers-repository'
 import { InMemoryNotificationsRepository } from '@/tests/repositories/inm-notifications-repository'
-import { waitFor } from '@/tests/utils/wait-for'
+import { waitFor } from '@/utils/fn/wait-for'
 import {
   SendNotificationUseCase,
   SendNotificationUseCaseInput,

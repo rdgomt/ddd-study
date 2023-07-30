@@ -1,5 +1,5 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { AsyncNullable } from '@/utils/typescript.utils'
+import { AsyncNullable } from '@/utils/typescript/types'
 import { QuestionComment } from '../../enterprise/entities/question-comment'
 
 export interface QuestionCommentsRepository {

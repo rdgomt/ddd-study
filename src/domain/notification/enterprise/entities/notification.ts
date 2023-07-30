@@ -1,6 +1,6 @@
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
-import { Optional } from '@/utils/typescript.utils'
+import { Optional } from '@/utils/typescript/types'
 
 interface NotificationProps {
   content: string

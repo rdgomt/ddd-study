@@ -1,6 +1,6 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
-import { AsyncNullable } from '@/utils/typescript.utils'
+import { AsyncNullable } from '@/utils/typescript/types'
 
 export interface AnswerCommentsRepository {
   create: (answerComment: AnswerComment) => Promise<void>

@@ -1,4 +1,4 @@
-import { Nullable } from '@/utils/typescript.utils'
+import { Nullable } from '@/utils/typescript/types'
 import { Notification } from '../../enterprise/entities/notification'
 
 export interface NotificationsRepository {

@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
-import { now } from '@/utils/date.utils'
-import { Optional } from '@/utils/typescript.utils'
+import { now } from '@/utils/date/now'
+import { Optional } from '@/utils/typescript/types'
 import { AnswerCreatedEvent } from '../events/answer-created-event'
 import { AnswerAttachmentsList } from './answer-attachment-list'
 
