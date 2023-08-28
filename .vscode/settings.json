@@ -1,3 +1,6 @@
 {
-  "vitest.commandLine": "yarn test --"
+  "vitest.commandLine": "yarn test --",
+  "rest-client.defaultHeaders": {
+    "content-type": "application/json"
+  }
 }

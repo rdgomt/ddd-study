@@ -1,5 +1,6 @@
 {
   "extends": ["@rdgomt/eslint-config", "plugin:boundaries/strict"],
+  "ignorePatterns": [".husky", ".vscode", "coverage", "data", "dist", "node_modules", "**/*.js"],
   "plugins": ["boundaries", "perfectionist"],
   "rules": {
     "boundaries/element-types": [
@@ -13,6 +14,10 @@
           },
           {
             "from": "domain",
+            "allow": ["core", "domain", "tests", "types", "utils"]
+          },
+          {
+            "from": "infra",
             "allow": ["*"]
           },
           {
@@ -38,6 +43,7 @@
     "require-atomic-updates": "off", // TODO: estudar como resolver
 
     "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
+    "@typescript-eslint/no-extraneous-class": "off",
     "max-statements": "off",
     "padding-line-between-statements": [
       "warn",
@@ -87,7 +93,34 @@
     "perfectionist/sort-object-types": "warn",
     "perfectionist/sort-objects": "warn",
     "perfectionist/sort-union-types": "off",
-    "typescript-sort-keys/interface": "off"
+    "typescript-sort-keys/interface": "off",
+    "unicorn/prevent-abbreviations": [
+      "warn",
+      {
+        "ignore": [
+          "\\.prod|dev$",
+          "args",
+          "env",
+          "Env",
+          "e2e",
+          "fn",
+          "Fn",
+          "lib",
+          "Lib",
+          "obj",
+          "Obj",
+          "params",
+          "Params",
+          "props",
+          "Props",
+          "Prop",
+          "ref",
+          "Ref",
+          "temp",
+          "Temp"
+        ]
+      }
+    ]
   },
   "settings": {
     "boundaries/elements": [
@@ -98,6 +131,10 @@
       {
         "type": "domain",
         "pattern": "src/domain"
+      },
+      {
+        "type": "infra",
+        "pattern": "src/infra"
       },
       {
         "type": "tests",

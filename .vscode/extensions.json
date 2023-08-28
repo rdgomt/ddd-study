@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "humao.rest-client",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "Prisma.prisma",
+    "ZixuanChen.vitest-explorer"
+  ]
+}

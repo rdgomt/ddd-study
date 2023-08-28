@@ -5,7 +5,6 @@ import { DomainEvent } from './domain-event'
 
 type DomainEventCallback = (event: any) => void
 
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class DomainEvents {
   private static handlersMap: Record<string, DomainEventCallback[]> = {}
   private static markedAggregates: AggregateRoot<any>[] = []
