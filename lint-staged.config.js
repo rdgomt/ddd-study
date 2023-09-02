@@ -1,4 +1,4 @@
-/* eslint-disable perfectionist/sort-objects */
+/* eslint-disable */
 
 module.exports = {
   '*': ['yarn prettify'],

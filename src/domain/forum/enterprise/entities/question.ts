@@ -11,15 +11,15 @@ import { Slug } from './value-objects/slug'
 export interface QuestionProps {
   attachments: QuestionAttachmentsList
   authorId: UniqueEntityID
-  bestAnswerId?: UniqueEntityID
+  bestAnswerId?: UniqueEntityID | null
   content: string
   createdAt: Date
   slug: Slug
   title: string
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
-export type CreateQuestionProps = Optional<Omit<QuestionProps, 'slug' | 'updatedAt'>, 'createdAt' | 'attachments'>
+export type CreateQuestionProps = Optional<QuestionProps, 'createdAt' | 'attachments' | 'slug' | 'updatedAt'>
 
 export class Question extends AggregateRoot<QuestionProps> {
   static create(props: CreateQuestionProps, id?: UniqueEntityID) {
@@ -28,7 +28,7 @@ export class Question extends AggregateRoot<QuestionProps> {
         ...props,
         attachments: props.attachments ?? new QuestionAttachmentsList(),
         createdAt: props.createdAt ?? now(),
-        slug: Slug.createFromText(props.title),
+        slug: props.slug ?? Slug.createFromText(props.title),
       },
       id,
     )
@@ -51,7 +51,7 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.bestAnswerId
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
+  set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null) {
     if (bestAnswerId && bestAnswerId !== this.props.bestAnswerId) {
       this.addDomainEvent(new QuestionBestAnswerChosenEvent(this, bestAnswerId))
     }

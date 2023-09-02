@@ -9,6 +9,9 @@
     "check-spell": "cspell \"src/**/*.{ts,tsx}\" --no-must-find-files --gitignore --unique --no-progress",
     "check-types": "tsc --noEmit",
     "commitlint": "commitlint --edit",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "eslint --fix",
     "lint-staged": "lint-staged --concurrent false",
@@ -34,13 +37,15 @@
     "@prisma/client": "^5.2.0",
     "@types/bcryptjs": "^2.4.2",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "dayjs": "^1.11.9",
+    "helmet": "^7.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "zod": "^3.22.2",
-    "zod-validation-error": "^1.5.0"
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.7",

@@ -1,5 +1,6 @@
 import { Either, right } from '@/core/either'
 import { PaginationParams } from '@/core/repositories/pagination-params'
+import { Injectable } from '@nestjs/common'
 import { Question } from '../../enterprise/entities/question'
 import { QuestionsRepository } from '../repositories/questions-repository'
 
@@ -14,6 +15,7 @@ type GetRecentQuestionsUseCaseOutput = Promise<
   >
 >
 
+@Injectable()
 export class GetRecentQuestionsUseCase {
   constructor(private questionsRepository: QuestionsRepository) {}
 

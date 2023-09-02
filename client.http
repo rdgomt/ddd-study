@@ -7,7 +7,7 @@ POST {{baseUrl}}/accounts
 {
   "name": "John Doe",
   "email": "john@doe.com",
-  "password": "123456"
+  "password": "Teste@123"
 }
 
 ###
@@ -27,12 +27,12 @@ POST {{baseUrl}}/questions
 Authorization: Bearer {{authToken}}
 
 {
-  "title": "Nova pergunta 3",
+  "title": "Nova pergunta hehe",
   "content": "Teste"
 }
 
 ###
 
 # @name getRecentQuestions
-GET {{baseUrl}}/questions?page=2
+GET {{baseUrl}}/questions?page=1
 Authorization: Bearer {{authToken}}

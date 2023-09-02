@@ -1,6 +1,20 @@
 {
   "extends": ["@rdgomt/eslint-config", "plugin:boundaries/strict"],
   "ignorePatterns": [".husky", ".vscode", "coverage", "data", "dist", "node_modules", "**/*.js"],
+  "overrides": [
+    {
+      "files": ["*.presenter.ts", "*-presenter.ts"],
+      "rules": {
+        "perfectionist/sort-objects": "off"
+      }
+    },
+    {
+      "files": ["*.controller.ts", "*-controller.ts"],
+      "rules": {
+        "sonarjs/no-small-switch": "off"
+      }
+    }
+  ],
   "plugins": ["boundaries", "perfectionist"],
   "rules": {
     "boundaries/element-types": [

@@ -9,8 +9,7 @@ export abstract class Entity<Props> {
     this._id = id ?? new UniqueEntityID()
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public equals(entity: Entity<any>): boolean {
+  public equals(entity: Entity<unknown>): boolean {
     return entity === this || entity.id === this._id
   }
 
