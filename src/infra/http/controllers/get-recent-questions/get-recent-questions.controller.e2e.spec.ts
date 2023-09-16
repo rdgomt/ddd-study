@@ -1,55 +1,46 @@
 import request from 'supertest'
 import { AppModule } from '@/infra/app.module'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
-import { faker } from '@faker-js/faker'
+import { DatabaseModule } from '@/infra/database/database.module'
+import { QuestionFactory } from '@/tests/factories/make-question'
+import { StudentFactory } from '@/tests/factories/make-student'
 import { HttpStatus, INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 
 describe('GetRecentQuestionsController', () => {
   let app: INestApplication
-  let prisma: PrismaService
+  let studentFactory: StudentFactory
+  let questionFactory: QuestionFactory
   let jwt: JwtService
 
   beforeAll(async () => {
     const testingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [StudentFactory, QuestionFactory],
     }).compile()
 
     app = testingModule.createNestApplication()
-    prisma = testingModule.get(PrismaService)
+    studentFactory = testingModule.get(StudentFactory)
+    questionFactory = testingModule.get(QuestionFactory)
     jwt = testingModule.get(JwtService)
 
     await app.init()
   })
 
-  it('should be able to get recent questions', async () => {
-    const user = await prisma.user.create({
-      data: {
-        email: faker.internet.email(),
-        name: faker.person.fullName(),
-        password: faker.internet.password(),
-      },
-    })
+  test('GET /questions', async () => {
+    const user = await studentFactory.makePrismaStudent()
+    const accessToken = jwt.sign({ sub: user.id.value })
 
-    const accessToken = jwt.sign({ sub: user.id })
-
-    await prisma.question.createMany({
-      data: [
-        {
-          authorId: user.id,
-          content: faker.lorem.text(),
-          slug: 'question-01',
-          title: 'Question 01',
-        },
-        {
-          authorId: user.id,
-          content: faker.lorem.text(),
-          slug: 'question-02',
-          title: 'Question 02',
-        },
-      ],
-    })
+    const [question01, question02] = await Promise.all([
+      questionFactory.makePrismaQuestion({
+        authorId: user.id,
+        title: 'Question 01',
+      }),
+      questionFactory.makePrismaQuestion({
+        authorId: user.id,
+        title: 'Question 02',
+      }),
+    ])
 
     const response = await request(app.getHttpServer())
       .get('/questions')
@@ -59,7 +50,11 @@ describe('GetRecentQuestionsController', () => {
     expect(response.statusCode).toBe(HttpStatus.OK)
 
     expect(response.body).toEqual({
-      questions: [expect.objectContaining({ title: 'Question 01' }), expect.objectContaining({ title: 'Question 02' })],
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      questions: expect.arrayContaining([
+        expect.objectContaining({ title: question01.title }),
+        expect.objectContaining({ title: question02.title }),
+      ]),
     })
   })
 })

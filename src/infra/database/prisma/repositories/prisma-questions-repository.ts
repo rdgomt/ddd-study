@@ -6,10 +6,10 @@ import { Injectable } from '@nestjs/common'
 import { PrismaQuestionMapper } from '../mappers/prisma-question-mapper'
 import { PrismaService } from '../prisma.service'
 
-const ITEMS_PER_PAGE = 20
-
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
+  ITEMS_PER_PAGE = 20
+
   constructor(private prisma: PrismaService) {}
 
   async create(question: Question): Promise<void> {
@@ -63,8 +63,8 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
       orderBy: {
         createdAt: 'desc',
       },
-      skip: (page - 1) * ITEMS_PER_PAGE,
-      take: ITEMS_PER_PAGE,
+      skip: (page - 1) * this.ITEMS_PER_PAGE,
+      take: this.ITEMS_PER_PAGE,
     })
 
     return questions.map((question) => PrismaQuestionMapper.toDomain(question))

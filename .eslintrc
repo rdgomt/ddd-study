@@ -123,6 +123,8 @@
           "Lib",
           "obj",
           "Obj",
+          "param",
+          "Param",
           "params",
           "Params",
           "props",

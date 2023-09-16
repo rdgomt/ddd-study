@@ -13,10 +13,10 @@ export interface AnswerProps {
   content: string
   createdAt: Date
   questionId: UniqueEntityID
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
-export type CreateAnswerProps = Optional<Omit<AnswerProps, 'updatedAt'>, 'createdAt' | 'attachments'>
+export type CreateAnswerProps = Optional<AnswerProps, 'createdAt' | 'attachments' | 'updatedAt'>
 
 export class Answer extends AggregateRoot<AnswerProps> {
   static create(props: CreateAnswerProps, id?: UniqueEntityID) {

@@ -19,7 +19,7 @@ describe('CreateAccountController', () => {
     await app.init()
   })
 
-  it('should be able to create an user account', async () => {
+  test('POST /accounts', async () => {
     const email = faker.internet.email()
 
     const response = await request(app.getHttpServer()).post('/accounts').send({

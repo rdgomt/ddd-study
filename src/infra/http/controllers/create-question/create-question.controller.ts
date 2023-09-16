@@ -1,6 +1,5 @@
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question'
 import { AuthUser } from '@/infra/auth/auth-user.decorator'
-import { AuthUserPayload } from '@/infra/auth/jwt.strategy'
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common'
 import { CreateQuestionDTO } from './create-question.dto'
 
@@ -9,9 +8,8 @@ export class CreateQuestionController {
   constructor(private createQuestion: CreateQuestionUseCase) {}
 
   @Post()
-  async handle(@Body() body: CreateQuestionDTO, @AuthUser() user: AuthUserPayload) {
+  async handle(@Body() body: CreateQuestionDTO, @AuthUser('sub') authorId: string) {
     const { content, title } = body
-    const authorId = user.sub
 
     const result = await this.createQuestion.execute({
       authorId,

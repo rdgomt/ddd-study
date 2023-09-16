@@ -1,36 +1,35 @@
 import { hash } from 'bcryptjs'
 import request from 'supertest'
 import { AppModule } from '@/infra/app.module'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { DatabaseModule } from '@/infra/database/database.module'
+import { StudentFactory } from '@/tests/factories/make-student'
 import { faker } from '@faker-js/faker'
 import { HttpStatus, INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 
 describe('AuthenticateController', () => {
   let app: INestApplication
-  let prisma: PrismaService
+  let studentFactory: StudentFactory
 
   beforeAll(async () => {
     const testingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [StudentFactory],
     }).compile()
 
     app = testingModule.createNestApplication()
-    prisma = testingModule.get(PrismaService)
+    studentFactory = testingModule.get(StudentFactory)
+
     await app.init()
   })
 
-  it('should be able to authenticate an user', async () => {
+  test('POST /sessions', async () => {
     const email = faker.internet.email()
-    const name = faker.person.fullName()
     const password = faker.internet.password()
 
-    await prisma.user.create({
-      data: {
-        email,
-        name,
-        password: await hash(password, 8),
-      },
+    await studentFactory.makePrismaStudent({
+      email,
+      password: await hash(password, 8),
     })
 
     const response = await request(app.getHttpServer()).post('/sessions').send({

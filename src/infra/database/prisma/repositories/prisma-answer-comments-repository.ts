@@ -1,25 +1,58 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository'
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
-import { AsyncNullable } from '@/utils/typescript/types'
-import { Injectable, NotImplementedException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
+import { PrismaAnswerCommentMapper } from '../mappers/prisma-answer-comment-mapper'
+import { PrismaService } from '../prisma.service'
 
 @Injectable()
 export class PrismaAnswerCommentsRepository implements AnswerCommentsRepository {
-  create(answerComment: AnswerComment): Promise<void> {
-    throw new NotImplementedException()
+  ITEMS_PER_PAGE = 20
+
+  constructor(private prisma: PrismaService) {}
+
+  async create(answerComment: AnswerComment): Promise<void> {
+    const data = PrismaAnswerCommentMapper.toPrisma(answerComment)
+
+    await this.prisma.comment.create({
+      data,
+    })
   }
 
-  delete(answerComment: AnswerComment): Promise<void> {
-    throw new NotImplementedException()
+  async delete(answerComment: AnswerComment): Promise<void> {
+    await this.prisma.comment.delete({
+      where: {
+        id: answerComment.id.value,
+      },
+    })
   }
 
-  findById(id: string): AsyncNullable<AnswerComment> {
-    throw new NotImplementedException()
+  async findById(id: string): Promise<AnswerComment | null> {
+    const answerComment = await this.prisma.comment.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!answerComment) {
+      return null
+    }
+
+    return PrismaAnswerCommentMapper.toDomain(answerComment)
   }
 
-  findManyByAnswerId(answerId: string, pagination: PaginationParams): Promise<AnswerComment[]> {
-    throw new NotImplementedException()
+  async findManyByAnswerId(answerId: string, { page }: PaginationParams): Promise<AnswerComment[]> {
+    const answerComments = await this.prisma.comment.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      skip: (page - 1) * this.ITEMS_PER_PAGE,
+      take: this.ITEMS_PER_PAGE,
+      where: {
+        answerId,
+      },
+    })
+
+    return answerComments.map((answerComment) => PrismaAnswerCommentMapper.toDomain(answerComment))
   }
 }

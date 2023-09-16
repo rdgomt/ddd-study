@@ -1,5 +1,6 @@
 import { Either, right } from '@/core/either'
 import { PaginationParams } from '@/core/repositories/pagination-params'
+import { Injectable } from '@nestjs/common'
 import { AnswerComment } from '../../enterprise/entities/answer-comment'
 import { AnswerCommentsRepository } from '../repositories/answer-comments-repository'
 
@@ -17,6 +18,7 @@ type GetAnswerCommentsUseCaseOutput = Promise<
   >
 >
 
+@Injectable()
 export class GetAnswerCommentsUseCase {
   constructor(private answerCommentsRepository: AnswerCommentsRepository) {}
 

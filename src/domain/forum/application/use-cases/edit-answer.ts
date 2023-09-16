@@ -2,6 +2,7 @@ import { Either, left, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
+import { Injectable } from '@nestjs/common'
 import { Answer } from '../../enterprise/entities/answer'
 import { AnswerAttachment } from '../../enterprise/entities/answer-attachment'
 import { AnswerAttachmentsList } from '../../enterprise/entities/answer-attachment-list'
@@ -24,6 +25,7 @@ type EditAnswerUseCaseOutput = Promise<
   >
 >
 
+@Injectable()
 export class EditAnswerUseCase {
   constructor(
     private answersRepository: AnswersRepository,

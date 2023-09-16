@@ -3,6 +3,7 @@ import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
+import { Injectable } from '@nestjs/common'
 import { QuestionsRepository } from '../repositories/questions-repository'
 
 interface CommentOnQuestionUseCaseInput {
@@ -20,6 +21,7 @@ type CommentOnQuestionUseCaseOutput = Promise<
   >
 >
 
+@Injectable()
 export class CommentOnQuestionUseCase {
   constructor(
     private questionsRepository: QuestionsRepository,

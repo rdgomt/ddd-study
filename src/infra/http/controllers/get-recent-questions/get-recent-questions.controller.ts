@@ -1,14 +1,14 @@
 import { GetRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/get-recent-questions'
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
 import { QuestionPresenter } from '../../presenters/question.presenter'
-import { GetRecentQuestionsParamsDTO } from './get-recent-questions-params.dto'
+import { GetRecentQuestionsQueryParams } from './get-recent-questions-query-params'
 
 @Controller('/questions')
 export class GetRecentQuestionsController {
   constructor(private getRecentQuestions: GetRecentQuestionsUseCase) {}
 
   @Get()
-  async handle(@Query() { page = 1 }: GetRecentQuestionsParamsDTO) {
+  async handle(@Query() { page = 1 }: GetRecentQuestionsQueryParams) {
     const result = await this.getRecentQuestions.execute({ page })
 
     if (result.isLeft()) {

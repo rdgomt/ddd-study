@@ -1,6 +1,7 @@
 import { Either, left, right } from '@/core/either'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
+import { Injectable } from '@nestjs/common'
 import { Question } from '../../enterprise/entities/question'
 import { AnswersRepository } from '../repositories/answers-repository'
 import { QuestionsRepository } from '../repositories/questions-repository'
@@ -19,6 +20,7 @@ type ChooseQuestionBestAnswerUseCaseOutput = Promise<
   >
 >
 
+@Injectable()
 export class ChooseQuestionBestAnswerUseCase {
   constructor(private answersRepository: AnswersRepository, private questionsRepository: QuestionsRepository) {}
 
