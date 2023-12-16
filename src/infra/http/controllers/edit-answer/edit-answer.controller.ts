@@ -10,11 +10,11 @@ export class EditAnswerController {
   @Put()
   @HttpCode(HttpStatus.NO_CONTENT)
   async handle(@AuthUser('sub') authorId: string, @Param('answerId') answerId: string, @Body() body: EditAnswerDTO) {
-    const { content } = body
+    const { attachmentsIds, content } = body
 
     const result = await this.editAnswer.execute({
       answerId,
-      attachmentsIds: [],
+      attachmentsIds,
       authorId,
       content,
     })

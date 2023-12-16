@@ -1,6 +1,10 @@
-import { IsString } from 'class-validator'
+import { IsArray, IsOptional, IsString } from 'class-validator'
 
 export class AnswerQuestionDTO {
   @IsString()
   content!: string
+
+  @IsArray()
+  @IsOptional()
+  attachmentsIds?: string[]
 }

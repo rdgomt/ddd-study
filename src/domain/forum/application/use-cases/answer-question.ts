@@ -7,7 +7,7 @@ import { AnswerAttachmentsList } from '../../enterprise/entities/answer-attachme
 import { AnswersRepository } from '../repositories/answers-repository'
 
 interface AnswerQuestionUseCaseInput {
-  attachmentsIds: string[]
+  attachmentsIds?: string[]
   authorId: string
   content: string
   questionId: string
@@ -27,7 +27,7 @@ export class AnswerQuestionUseCase {
   constructor(private answersRepository: AnswersRepository) {}
 
   async execute({
-    attachmentsIds,
+    attachmentsIds = [],
     authorId,
     content,
     questionId,

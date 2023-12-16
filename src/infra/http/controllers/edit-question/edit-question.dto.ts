@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional } from 'class-validator'
 
 export class EditQuestionDTO {
   @IsNotEmpty()
@@ -6,4 +6,8 @@ export class EditQuestionDTO {
 
   @IsNotEmpty()
   title!: string
+
+  @IsOptional()
+  @IsArray()
+  attachmentsIds?: string[]
 }

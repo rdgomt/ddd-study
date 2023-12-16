@@ -23,6 +23,7 @@ describe('AnswerQuestionUseCase', () => {
     })
 
     expect(result.isRight()).toBe(true)
+
     expect(answersRepository.items[0]).toEqual(result.value?.answer)
 
     expect(answersRepository.items[0]?.attachments.currentItems).toHaveLength(2)
@@ -31,5 +32,29 @@ describe('AnswerQuestionUseCase', () => {
       expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityID('2') }),
     ])
+  })
+
+  it('should persist attachments when creating a new answer', async () => {
+    const result = await createAnswerUseCase.execute({
+      attachmentsIds: ['1', '2'],
+      authorId: '1',
+      content: 'Conteúdo da resposta',
+      questionId: '1',
+    })
+
+    expect(result.isRight()).toBe(true)
+
+    expect(answerAttachmentsRepository.items).toHaveLength(2)
+
+    expect(answerAttachmentsRepository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          attachmentId: new UniqueEntityID('1'),
+        }),
+        expect.objectContaining({
+          attachmentId: new UniqueEntityID('1'),
+        }),
+      ]),
+    )
   })
 })

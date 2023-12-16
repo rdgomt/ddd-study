@@ -8,6 +8,26 @@ import { PrismaService } from '../prisma.service'
 export class PrismaQuestionAttachmentsRepository implements QuestionAttachmentsRepository {
   constructor(private prisma: PrismaService) {}
 
+  async createMany(attachments: QuestionAttachment[]): Promise<void> {
+    if (attachments.length === 0) {
+      return
+    }
+
+    const data = PrismaQuestionAttachmentMapper.toPrismaUpdateMany(attachments)
+
+    await this.prisma.attachment.updateMany(data)
+  }
+
+  async deleteMany(attachments: QuestionAttachment[]): Promise<void> {
+    if (attachments.length === 0) {
+      return
+    }
+
+    const data = PrismaQuestionAttachmentMapper.toPrismaDeleteMany(attachments)
+
+    await this.prisma.attachment.deleteMany(data)
+  }
+
   async deleteManyByQuestionId(questionId: string): Promise<void> {
     await this.prisma.attachment.deleteMany({
       where: {

@@ -14,10 +14,10 @@ export class EditQuestionController {
     @Param('questionId') questionId: string,
     @Body() body: EditQuestionDTO,
   ) {
-    const { content, title } = body
+    const { attachmentsIds, content, title } = body
 
     const result = await this.editQuestion.execute({
-      attachmentsIds: [],
+      attachmentsIds,
       authorId,
       content,
       questionId,

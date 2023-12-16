@@ -107,36 +107,7 @@
     "perfectionist/sort-object-types": "warn",
     "perfectionist/sort-objects": "warn",
     "perfectionist/sort-union-types": "off",
-    "typescript-sort-keys/interface": "off",
-    "unicorn/prevent-abbreviations": [
-      "warn",
-      {
-        "ignore": [
-          "\\.prod|dev$",
-          "args",
-          "env",
-          "Env",
-          "e2e",
-          "fn",
-          "Fn",
-          "lib",
-          "Lib",
-          "obj",
-          "Obj",
-          "param",
-          "Param",
-          "params",
-          "Params",
-          "props",
-          "Props",
-          "Prop",
-          "ref",
-          "Ref",
-          "temp",
-          "Temp"
-        ]
-      }
-    ]
+    "typescript-sort-keys/interface": "off"
   },
   "settings": {
     "boundaries/elements": [

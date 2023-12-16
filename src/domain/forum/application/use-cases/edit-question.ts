@@ -10,7 +10,7 @@ import { QuestionAttachmentsRepository } from '../repositories/question-attachme
 import { QuestionsRepository } from '../repositories/questions-repository'
 
 interface EditQuestionUseCaseInput {
-  attachmentsIds: string[]
+  attachmentsIds?: string[]
   authorId: string
   content: string
   questionId: string
@@ -34,7 +34,7 @@ export class EditQuestionUseCase {
   ) {}
 
   async execute({
-    attachmentsIds,
+    attachmentsIds = [],
     authorId,
     content,
     questionId,

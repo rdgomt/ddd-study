@@ -16,9 +16,11 @@ import { GetQuestionAnswersUseCase } from '@/domain/forum/application/use-cases/
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug'
 import { GetQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/get-question-comments'
 import { GetRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/get-recent-questions'
+import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment'
 import { Module } from '@nestjs/common'
 import { CryptoModule } from '../crypto/crypto.module'
 import { DatabaseModule } from '../database/database.module'
+import { StorageModule } from '../storage/storage.module'
 import { AnswerQuestionController } from './controllers/answer-question/answer-question.controller'
 import { AuthenticateController } from './controllers/authenticate/authenticate.controller'
 import { ChooseQuestionBestAnswerController } from './controllers/choose-question-best-answer/choose-question-best-answer.controller'
@@ -37,6 +39,7 @@ import { GetQuestionAnswersController } from './controllers/get-question-answers
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug/get-question-by-slug.controller'
 import { GetQuestionCommentsController } from './controllers/get-question-comments/get-question-comments.controller'
 import { GetRecentQuestionsController } from './controllers/get-recent-questions/get-recent-questions.controller'
+import { UploadAttachmentController } from './controllers/upload-attachment/upload-attachment.controller'
 
 @Module({
   controllers: [
@@ -58,8 +61,9 @@ import { GetRecentQuestionsController } from './controllers/get-recent-questions
     DeleteAnswerCommentController,
     GetQuestionCommentsController,
     GetAnswerCommentsController,
+    UploadAttachmentController,
   ],
-  imports: [DatabaseModule, CryptoModule],
+  imports: [DatabaseModule, CryptoModule, StorageModule],
   providers: [
     CreateQuestionUseCase,
     GetRecentQuestionsUseCase,
@@ -79,6 +83,7 @@ import { GetRecentQuestionsController } from './controllers/get-recent-questions
     DeleteAnswerCommentUseCase,
     GetQuestionCommentsUseCase,
     GetAnswerCommentsUseCase,
+    UploadAndCreateAttachmentUseCase,
   ],
 })
 export class HttpModule {}

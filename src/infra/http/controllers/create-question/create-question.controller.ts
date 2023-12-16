@@ -9,9 +9,10 @@ export class CreateQuestionController {
 
   @Post()
   async handle(@Body() body: CreateQuestionDTO, @AuthUser('sub') authorId: string) {
-    const { content, title } = body
+    const { attachmentsIds, content, title } = body
 
     const result = await this.createQuestion.execute({
+      attachmentsIds,
       authorId,
       content,
       title,

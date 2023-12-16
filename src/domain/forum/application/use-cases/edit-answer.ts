@@ -11,7 +11,7 @@ import { AnswersRepository } from '../repositories/answers-repository'
 
 interface EditAnswerUseCaseInput {
   answerId: string
-  attachmentsIds: string[]
+  attachmentsIds?: string[]
   authorId: string
   content: string
 }
@@ -32,7 +32,7 @@ export class EditAnswerUseCase {
     private answerAttachmentsRepository: AnswerAttachmentsRepository,
   ) {}
 
-  async execute({ answerId, attachmentsIds, authorId, content }: EditAnswerUseCaseInput): EditAnswerUseCaseOutput {
+  async execute({ answerId, attachmentsIds = [], authorId, content }: EditAnswerUseCaseInput): EditAnswerUseCaseOutput {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {

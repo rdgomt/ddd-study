@@ -13,10 +13,10 @@ export class AnswerQuestionController {
     @Param('questionId') questionId: string,
     @Body() body: AnswerQuestionDTO,
   ) {
-    const { content } = body
+    const { attachmentsIds, content } = body
 
     const result = await this.answerQuestion.execute({
-      attachmentsIds: [],
+      attachmentsIds,
       authorId,
       content,
       questionId,
