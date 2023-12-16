@@ -67,8 +67,8 @@ describe('GetAnswerCommentsController', () => {
     expect(response.body).toEqual({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       comments: expect.arrayContaining([
-        expect.objectContaining({ content: answerComment01.content }),
-        expect.objectContaining({ content: answerComment02.content }),
+        expect.objectContaining({ authorName: user.name, content: answerComment01.content }),
+        expect.objectContaining({ authorName: user.name, content: answerComment02.content }),
       ]),
     })
   })

@@ -1,7 +1,7 @@
 import { Either, right } from '@/core/either'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { Injectable } from '@nestjs/common'
-import { QuestionComment } from '../../enterprise/entities/question-comment'
+import { CommentWithAuthor } from '../../enterprise/entities/value-objects/comment-with-author'
 import { QuestionCommentsRepository } from '../repositories/question-comments-repository'
 
 interface GetQuestionCommentsUseCaseInput {
@@ -13,7 +13,7 @@ type GetQuestionCommentsUseCaseOutput = Promise<
   Either<
     void,
     {
-      questionComments: QuestionComment[]
+      comments: CommentWithAuthor[]
     }
   >
 >
@@ -23,12 +23,12 @@ export class GetQuestionCommentsUseCase {
   constructor(private questionCommentsRepository: QuestionCommentsRepository) {}
 
   async execute({ pagination, questionId }: GetQuestionCommentsUseCaseInput): GetQuestionCommentsUseCaseOutput {
-    const questionComments = await this.questionCommentsRepository.findManyByQuestionId(questionId, {
+    const comments = await this.questionCommentsRepository.findManyByQuestionIdWithAuthor(questionId, {
       page: pagination.page,
     })
 
     return right({
-      questionComments,
+      comments,
     })
   }
 }

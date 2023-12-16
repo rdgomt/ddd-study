@@ -18,7 +18,7 @@ export class GetRecentQuestionsController {
     const { questions } = result.value
 
     return {
-      questions: questions.map((question) => QuestionPresenter.present(question)),
+      questions: questions.map((question) => QuestionPresenter.toHTTP(question)),
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Question } from '@/domain/forum/enterprise/entities/question'
 
 export class QuestionPresenter {
-  static present(question: Question) {
+  static toHTTP(question: Question) {
     return {
       id: question.id.value,
       title: question.title,

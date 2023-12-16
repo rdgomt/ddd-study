@@ -6,6 +6,7 @@ import { InMemoryNotificationsRepository } from '@/tests/repositories/inm-notifi
 import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
 import { InMemoryQuestionCommentsRepository } from '@/tests/repositories/inm-question-comments-repository'
 import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
+import { InMemoryStudentsRepository } from '@/tests/repositories/inm-students-repository'
 import { waitFor } from '@/utils/fn/wait-for'
 import {
   SendNotificationUseCase,
@@ -13,6 +14,7 @@ import {
   SendNotificationUseCaseOutput,
 } from '../use-cases/send-notification'
 
+let studentsRepository: InMemoryStudentsRepository
 let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
 let questionsRepository: InMemoryQuestionsRepository
 let questionCommentsRepository: InMemoryQuestionCommentsRepository
@@ -22,9 +24,10 @@ let sendNotificationSpy: SpyInstance<[SendNotificationUseCaseInput], SendNotific
 
 describe('OnQuestionCommentCreated', () => {
   beforeEach(() => {
+    studentsRepository = new InMemoryStudentsRepository()
     questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
     questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository)
-    questionCommentsRepository = new InMemoryQuestionCommentsRepository()
+    questionCommentsRepository = new InMemoryQuestionCommentsRepository(studentsRepository)
     notificationsRepository = new InMemoryNotificationsRepository()
     sendNotificationUseCase = new SendNotificationUseCase(notificationsRepository)
     sendNotificationSpy = vi.spyOn(sendNotificationUseCase, 'execute')

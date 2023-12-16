@@ -4,9 +4,8 @@ import { QuestionAttachmentsRepository } from '@/domain/forum/application/reposi
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { Question } from '@/domain/forum/enterprise/entities/question'
 
-const ITEMS_PER_PAGE = 20
-
 export class InMemoryQuestionsRepository implements QuestionsRepository {
+  private readonly ITEMS_PER_PAGE = 20
   public items: Question[] = []
 
   constructor(private questionAttachmentsRepository: QuestionAttachmentsRepository) {}
@@ -39,7 +38,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     return this.items
       .map((item) => item)
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-      .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
+      .slice((page - 1) * this.ITEMS_PER_PAGE, page * this.ITEMS_PER_PAGE)
   }
 
   async save(question: Question) {

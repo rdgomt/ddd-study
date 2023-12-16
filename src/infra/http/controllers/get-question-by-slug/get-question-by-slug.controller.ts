@@ -17,7 +17,7 @@ export class GetQuestionBySlugController {
     }
 
     return {
-      question: QuestionPresenter.present(result.value.question),
+      question: QuestionPresenter.toHTTP(result.value.question),
     }
   }
 }

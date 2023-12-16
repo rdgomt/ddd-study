@@ -4,9 +4,8 @@ import { AnswerAttachmentsRepository } from '@/domain/forum/application/reposito
 import { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository'
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 
-const ITEMS_PER_PAGE = 20
-
 export class InMemoryAnswersRepository implements AnswersRepository {
+  private readonly ITEMS_PER_PAGE = 20
   public items: Answer[] = []
 
   constructor(private answerAttachmentsRepository: AnswerAttachmentsRepository) {}
@@ -34,7 +33,7 @@ export class InMemoryAnswersRepository implements AnswersRepository {
   async findManyByQuestionId(questionId: string, { page }: PaginationParams) {
     return this.items
       .filter((item) => item.questionId.value === questionId)
-      .slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
+      .slice((page - 1) * this.ITEMS_PER_PAGE, page * this.ITEMS_PER_PAGE)
   }
 
   async save(answer: Answer) {

@@ -22,6 +22,6 @@ export class GetQuestionAnswersController {
 
     const { answers } = result.value
 
-    return { answers: answers.map((answer) => AnswerPresenter.present(answer)) }
+    return { answers: answers.map((answer) => AnswerPresenter.toHTTP(answer)) }
   }
 }

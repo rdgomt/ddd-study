@@ -2,10 +2,12 @@ import { makeQuestion } from '@/tests/factories/make-question'
 import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
 import { InMemoryQuestionCommentsRepository } from '@/tests/repositories/inm-question-comments-repository'
 import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
+import { InMemoryStudentsRepository } from '@/tests/repositories/inm-students-repository'
 import { faker } from '@faker-js/faker'
 import { CommentOnQuestionUseCase } from './comment-on-question'
 
 const COMMENT_CONTENT = faker.lorem.text()
+let studentsRepository: InMemoryStudentsRepository
 let questionsRepository: InMemoryQuestionsRepository
 let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
 let questionCommentsRepository: InMemoryQuestionCommentsRepository
@@ -13,9 +15,10 @@ let commentOnQuestionUseCase: CommentOnQuestionUseCase
 
 describe('CommentOnQuestionUseCase', () => {
   beforeEach(() => {
+    studentsRepository = new InMemoryStudentsRepository()
     questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
     questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository)
-    questionCommentsRepository = new InMemoryQuestionCommentsRepository()
+    questionCommentsRepository = new InMemoryQuestionCommentsRepository(studentsRepository)
     commentOnQuestionUseCase = new CommentOnQuestionUseCase(questionsRepository, questionCommentsRepository)
   })
 

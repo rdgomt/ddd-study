@@ -8,7 +8,7 @@ import { PrismaService } from '../prisma.service'
 
 @Injectable()
 export class PrismaAnswersRepository implements AnswersRepository {
-  ITEMS_PER_PAGE = 20
+  private readonly ITEMS_PER_PAGE = 20
 
   constructor(private prisma: PrismaService, private answerAttachmentsRepository: AnswerAttachmentsRepository) {}
 

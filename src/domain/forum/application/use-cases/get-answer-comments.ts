@@ -1,7 +1,7 @@
 import { Either, right } from '@/core/either'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { Injectable } from '@nestjs/common'
-import { AnswerComment } from '../../enterprise/entities/answer-comment'
+import { CommentWithAuthor } from '../../enterprise/entities/value-objects/comment-with-author'
 import { AnswerCommentsRepository } from '../repositories/answer-comments-repository'
 
 interface GetAnswerCommentsUseCaseInput {
@@ -13,7 +13,7 @@ type GetAnswerCommentsUseCaseOutput = Promise<
   Either<
     void,
     {
-      answerComments: AnswerComment[]
+      comments: CommentWithAuthor[]
     }
   >
 >
@@ -23,12 +23,12 @@ export class GetAnswerCommentsUseCase {
   constructor(private answerCommentsRepository: AnswerCommentsRepository) {}
 
   async execute({ answerId, pagination }: GetAnswerCommentsUseCaseInput): GetAnswerCommentsUseCaseOutput {
-    const answerComments = await this.answerCommentsRepository.findManyByAnswerId(answerId, {
+    const comments = await this.answerCommentsRepository.findManyByAnswerIdWithAuthor(answerId, {
       page: pagination.page,
     })
 
     return right({
-      answerComments,
+      comments,
     })
   }
 }

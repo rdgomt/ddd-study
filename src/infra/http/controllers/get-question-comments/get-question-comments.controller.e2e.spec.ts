@@ -61,8 +61,8 @@ describe('GetQuestionComments', () => {
     expect(response.body).toEqual({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       comments: expect.arrayContaining([
-        expect.objectContaining({ content: questionComment01.content }),
-        expect.objectContaining({ content: questionComment02.content }),
+        expect.objectContaining({ authorName: user.name, content: questionComment01.content }),
+        expect.objectContaining({ authorName: user.name, content: questionComment02.content }),
       ]),
     })
   })

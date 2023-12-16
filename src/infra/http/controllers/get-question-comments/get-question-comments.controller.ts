@@ -1,6 +1,6 @@
 import { GetQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/get-question-comments'
 import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common'
-import { CommentPresenter } from '../../presenters/comment.presenter'
+import { CommentWithAuthorPresenter } from '../../presenters/comment-with-author.presenter'
 import { GetQuestionCommentsQueryParams } from './get-question-comments-query-params'
 
 @Controller('/questions/:questionId/comments')
@@ -20,8 +20,8 @@ export class GetQuestionCommentsController {
       throw new BadRequestException()
     }
 
-    const { questionComments } = result.value
+    const { comments } = result.value
 
-    return { comments: questionComments.map((questionComment) => CommentPresenter.present(questionComment)) }
+    return { comments: comments.map((comment) => CommentWithAuthorPresenter.toHTTP(comment)) }
   }
 }
