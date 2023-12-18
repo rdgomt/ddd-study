@@ -17,6 +17,7 @@ import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/g
 import { GetQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/get-question-comments'
 import { GetRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/get-recent-questions'
 import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment'
+import { ReadNotificationUseCase } from '@/domain/notification/application/use-cases/read-notification'
 import { Module } from '@nestjs/common'
 import { CryptoModule } from '../crypto/crypto.module'
 import { DatabaseModule } from '../database/database.module'
@@ -39,6 +40,7 @@ import { GetQuestionAnswersController } from './controllers/get-question-answers
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug/get-question-by-slug.controller'
 import { GetQuestionCommentsController } from './controllers/get-question-comments/get-question-comments.controller'
 import { GetRecentQuestionsController } from './controllers/get-recent-questions/get-recent-questions.controller'
+import { ReadNotificationController } from './controllers/read-notification/read-notification.controller'
 import { UploadAttachmentController } from './controllers/upload-attachment/upload-attachment.controller'
 
 @Module({
@@ -62,6 +64,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment/uplo
     GetQuestionCommentsController,
     GetAnswerCommentsController,
     UploadAttachmentController,
+    ReadNotificationController,
   ],
   imports: [DatabaseModule, CryptoModule, StorageModule],
   providers: [
@@ -84,6 +87,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment/uplo
     GetQuestionCommentsUseCase,
     GetAnswerCommentsUseCase,
     UploadAndCreateAttachmentUseCase,
+    ReadNotificationUseCase,
   ],
 })
 export class HttpModule {}

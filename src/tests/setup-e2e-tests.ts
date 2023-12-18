@@ -1,6 +1,7 @@
 import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
+import { DomainEvents } from '@/core/events/domain-events'
 import { PrismaClient } from '@prisma/client'
 
 config({ override: true, path: '.env' })
@@ -23,6 +24,8 @@ function generateUniqueDatabaseURL(schemaId: string) {
 const schemaId = randomUUID()
 
 beforeAll(async () => {
+  DomainEvents.shouldRun = false
+
   const databaseURL = generateUniqueDatabaseURL(schemaId)
 
   process.env.DATABASE_URL = databaseURL

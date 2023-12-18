@@ -2,10 +2,10 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/value-objects/unique-entity-id'
 import { Optional } from '@/utils/typescript/types'
 
-interface NotificationProps {
+export interface NotificationProps {
   content: string
   createdAt: Date
-  readAt?: Date
+  readAt?: Date | null
   recipientId: UniqueEntityID
   title: string
 }

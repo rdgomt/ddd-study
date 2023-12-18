@@ -6,6 +6,7 @@ import { DomainEvent } from './domain-event'
 type DomainEventCallback = (event: any) => void
 
 export class DomainEvents {
+  public static shouldRun = true
   private static handlersMap: Record<string, DomainEventCallback[]> = {}
   private static markedAggregates: AggregateRoot<any>[] = []
 
@@ -61,6 +62,10 @@ export class DomainEvents {
   }
 
   private static dispatch(event: DomainEvent) {
+    if (!this.shouldRun) {
+      return
+    }
+
     const eventClassName: string = event.constructor.name
     const isEventRegistered = eventClassName in this.handlersMap
 
