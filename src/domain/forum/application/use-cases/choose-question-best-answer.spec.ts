@@ -4,12 +4,16 @@ import { makeAnswer } from '@/tests/factories/make-answer'
 import { makeQuestion } from '@/tests/factories/make-question'
 import { InMemoryAnswerAttachmentsRepository } from '@/tests/repositories/inm-answer-attachments-repository'
 import { InMemoryAnswersRepository } from '@/tests/repositories/inm-answers-repository'
+import { InMemoryAttachmentsRepository } from '@/tests/repositories/inm-attachments-repository'
 import { InMemoryQuestionAttachmentsRepository } from '@/tests/repositories/inm-question-attachments-repository'
 import { InMemoryQuestionsRepository } from '@/tests/repositories/inm-questions-repository'
+import { InMemoryStudentsRepository } from '@/tests/repositories/inm-students-repository'
 import { ChooseQuestionBestAnswerUseCase } from './choose-question-best-answer'
 
 let answerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let answersRepository: InMemoryAnswersRepository
 let questionsRepository: InMemoryQuestionsRepository
 let chooseQuestionBestAnswerUseCase: ChooseQuestionBestAnswerUseCase
@@ -18,7 +22,14 @@ describe('ChooseQuestionBestAnswerUseCase', () => {
   beforeEach(() => {
     answerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository()
     questionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
-    questionsRepository = new InMemoryQuestionsRepository(questionAttachmentsRepository)
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
+
+    questionsRepository = new InMemoryQuestionsRepository(
+      questionAttachmentsRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentsRepository,
+    )
     answersRepository = new InMemoryAnswersRepository(answerAttachmentsRepository)
     chooseQuestionBestAnswerUseCase = new ChooseQuestionBestAnswerUseCase(answersRepository, questionsRepository)
   })

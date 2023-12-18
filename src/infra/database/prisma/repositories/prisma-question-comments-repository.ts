@@ -2,6 +2,7 @@ import { PaginationParams } from '@/core/repositories/pagination-params'
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
 import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author'
+import { AsyncNullable } from '@/utils/typescript/types'
 import { Injectable } from '@nestjs/common'
 import { PrismaCommentWithAuthorMapper } from '../mappers/prisma-comment-with-author-mapper'
 import { PrismaQuestionCommentMapper } from '../mappers/prisma-question-comment-mapper'
@@ -29,7 +30,7 @@ export class PrismaQuestionCommentsRepository implements QuestionCommentsReposit
     })
   }
 
-  async findById(id: string): Promise<QuestionComment | null> {
+  async findById(id: string): AsyncNullable<QuestionComment> {
     const questionComment = await this.prisma.comment.findUnique({
       where: {
         id,
