@@ -139,3 +139,5 @@
     "boundaries/include": ["src/**/*"]
   }
 }
+
+// TODO: chore: disable max-lines for repository files
